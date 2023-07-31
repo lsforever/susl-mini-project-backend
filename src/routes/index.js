@@ -1,10 +1,13 @@
 import express from 'express'
 const router = express.Router()
 
-import docsRouter from './docsRoutes.js';
+import docRouter from './doc.js'
+import cropRouter from './crops.js'
 
-//docs
-router.use('/api-docs', docsRouter);
-
+// docs
+router.use('/api-doc', docsRouter);
+// crops
+router.use('/crop', cropRouter);
 
 export default router;
+
