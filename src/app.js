@@ -13,12 +13,12 @@ connect()
 
 
 // session
-const session = session({
-    secret: 'your secret key',
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create(options)
-})
+// const session = session({
+//     secret: 'your secret key',
+//     resave: false,
+//     saveUninitialized: true,
+//     store: MongoStore.create(options)
+// })
 
 
 
@@ -31,21 +31,13 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-/**
- * @openapi
- * /:
- *   get:
- *     description: Success check
- *     responses:
- *       200:
- *         description: Returns a "Success" string.
- */
-app.get('/', (req, res) => {
+
+app.get('/check', (req, res) => {
     res.send('Success');
 });
 
 
-import router from './routes/index.js';
-app.use('/api', router);
+import routes from './routes/index.js';
+app.use('/api', routes);
 
 export default app;

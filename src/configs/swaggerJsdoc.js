@@ -5,7 +5,7 @@ const options = {
   definition: {
     openapi: '3.1.0',
     info: {
-      title: 'CHAOS API V1',
+      title: 'Agro API v1',
       version: '1.0.0',
     },
   },
