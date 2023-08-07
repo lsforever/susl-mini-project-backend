@@ -5,6 +5,18 @@
 
 // add Compression
 
+ ==================
+// npm readme global //// generator-standard-readme
+// npm readme /////   node-readme | readme-project-generator
+// npm @appnest/readme /////  readme gen
+https://www.npmjs.com/package/@appnest/readme#-featured-readmes
+=====================
+
+ pnpm i --save-dev readme-project-generator
+
+
+ //TODO add rate limiters
+
 
 
 
