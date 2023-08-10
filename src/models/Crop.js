@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const CropSchema = mongoose.Schema(
     {
@@ -8,7 +8,7 @@ const CropSchema = mongoose.Schema(
         },
         category: {
             type: mongoose.Types.ObjectId,
-            ref: "CropCategory",
+            ref: 'CropCategory',
             required: true,
         },
         details: {
@@ -18,9 +18,9 @@ const CropSchema = mongoose.Schema(
     },
     {
         timestamps: true,
-        collection: "crops",
+        collection: 'crops',
     }
-);
+)
 
-const CropModel = mongoose.model("Crop", CropSchema);
-export default CropModel;
+const CropModel = mongoose.model('Crop', CropSchema)
+export default CropModel

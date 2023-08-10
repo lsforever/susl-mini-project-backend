@@ -1,15 +1,15 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from '../../configs/swaggerJsdoc.js';
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from '../../configs/swaggerJsdoc.js'
 
-router.use('/', swaggerUi.serve);
-router.get('/', swaggerUi.setup(swaggerSpec));
+router.use('/', swaggerUi.serve)
+router.get('/', swaggerUi.setup(swaggerSpec))
 router.get('/json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
+    res.setHeader('Content-Type', 'application/json')
+    res.send(swaggerSpec)
+})
 
 /**
  * @openapi
@@ -56,7 +56,7 @@ router.get('/json', (req, res) => {
  *                       example: "Some error message"
  */
 router.get('/test', (req, res) => {
-  res.send('docs success');
-});
+    res.send('docs success')
+})
 
-export default router;
+export default router

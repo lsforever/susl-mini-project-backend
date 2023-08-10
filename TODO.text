@@ -15,8 +15,65 @@ https://www.npmjs.com/package/@appnest/readme#-featured-readmes
  pnpm i --save-dev readme-project-generator
 
 
- //TODO add rate limiters
+ //TODO add rate limiters (add redis part) (Add custom limitters for user creation)  |||||| upstash , nested
+
+ // change api docs theme skins
+ 
+
+
+
+// TODO error handleing ... add error handler
+
+
+
+// TODO **********************************
+01. error handling (default express handle, handler middleware, central handler) - adding logger and respose in error with eror codes in http (2 npm express packges error handler, excepetion handler)
+02. Respose Handler or middlewarer...
+02. Add authentication
+
+
+///// error handling
+https://stackabuse.com/guide-to-exception-handling-in-express/
+https://dev.to/qbentil/how-to-write-custom-error-handler-middleware-in-expressjs-using-javascript-29j1
+https://www.toptal.com/nodejs/node-js-error-handling
+///// error handling
+https://www.npmjs.com/package/express-exception-handler
+https://www.npmjs.com/package/express-error-handler
+https://stackoverflow.com/questions/42611707/nodejs-best-practices-for-catching-errors
+https://stackoverflow.com/questions/72716474/what-is-the-best-practice-to-handle-errors-in-express
+////// error handling architecture
+https://youtu.be/1kIWRxcW_dU
+https://www.youtube.com/watch?v=WXa1yzLR3hw
+
+
+
+//routes
+https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/#architecture
+
+
+// https://github.com/manojjha86/NODE-JS/tree/main/NODE-JS-Basics
+
+
+
+//openapi 
+https://github.com/Rishabh570/nodejs-openapi-spec/blob/main/src/app.js
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//// SWAG definitions generator for example json data (2 solutions)
+01. https://roger13.github.io/SwagDefGen/
+02. npm install --global mock-to-openapi  ||||| mock-to-openapi ./examples
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
 
+
+///JWT ///////////////////
+Private claims are optional, and are any claims that don't fall under the registered or public claims categories.
+"sub" is the subject of the JWT, and is usually a unique identifying string for a user in an application, usually an email address, username, or id. Subjects are registered claims.
+"name" is the full name of the user who was issued the JWT, and is a public claim.
+"iat" is the "issued at" date for the token, and is a registered claim.
+///JWT ///////////////////
