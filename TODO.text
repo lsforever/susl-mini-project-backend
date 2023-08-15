@@ -80,6 +80,7 @@ Private claims are optional, and are any claims that don't fall under the regist
 
 
 
+
 // TODO send 404 for all not found end points
 // TODO add security to endpoints in docs
 
@@ -96,3 +97,10 @@ Private claims are optional, and are any claims that don't fall under the regist
 
 //pagination sort filter
 https://jeffdevslife.com/p/1-mongodb-query-of-advanced-filtering-sorting-limit-field-and-pagination-with-mongoose/
+
+
+
+
+
+///Query Selector Injection Attacks
+sanitize monogodb query "sanitizeFilter"
