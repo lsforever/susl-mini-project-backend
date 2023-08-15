@@ -1,5 +1,9 @@
+/* eslint-disable no-undef */
 import express from 'express'
 import bodyParser from 'body-parser'
+
+// async error wraper
+import 'express-async-errors'
 
 const app = express()
 
@@ -37,6 +41,43 @@ app.get('/api/doc/json', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(swaggerSpec)
 })
+////////////////////////////////////////////////////
+// import swaggerUi from 'swagger-ui-express'
+// import {
+//     openapiSpecificationV1,
+//     //openapiSpecificationV2,
+// } from './configs/swaggerJsdoc.js'
+
+// var options = {
+//     explorer: true,
+//     swaggerOptions: {
+//         urls: [
+//             {
+//                 url: '/api/doc/v1/json',
+//                 name: 'v1',
+//             },
+//             {
+//                 url: '/api/doc/v2/json',
+//                 name: 'v2',
+//             },
+//         ],
+//     },
+// }
+
+//app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(null, options))
+
+//app.use('/api/v1/doc', swaggerUi.serve)
+//app.get('/api/v1/doc', swaggerUi.setup(openapiSpecificationV1))
+//app.use('/api/v2/doc', swaggerUi.serve)
+//app.get('/api/v2/doc', swaggerUi.setup(openapiSpecificationV2))
+// app.get('/api/doc/v1/json', (req, res) => {
+//     res.setHeader('Content-Type', 'application/json')
+//     res.send(openapiSpecificationV1)
+// })
+// app.get('/api/doc/v2/json', (req, res) => {
+//     res.setHeader('Content-Type', 'application/json')
+//     res.send(openapiSpecificationV2)
+// })
 
 // HEalth check route //TODO change it
 import expressHealthcheck from 'express-healthcheck'
@@ -73,6 +114,9 @@ passportConfig()
 //passport.use(new LocalStrategy(User.authenticate()))
 //passport.serializeUser(User.serializeUser())
 //passport.deserializeUser(User.deserializeUser())
+
+import globalErrorHandler from './middlewares/globalErrorhandler.js'
+app.use(globalErrorHandler)
 
 //TODO add rate limiters
 

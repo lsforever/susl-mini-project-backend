@@ -13,12 +13,10 @@ router.get('/json', (req, res) => {
 
 /**
  * @openapi
- * /api/v1/games:
+ * /api/v2/crops:
  *   get:
- *     security:
- *       - bearerAuth: []
  *     tags:
- *       - Games
+ *       - Crops
  *     parameters:
  *       - in: query
  *         name: platform
@@ -39,6 +37,7 @@ router.get('/json', (req, res) => {
  *                 data:
  *                   type: array
  *                   items:
+ *                     $ref: "#/components/schemas/Game"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -57,7 +56,7 @@ router.get('/json', (req, res) => {
  *                       example: "Some error message"
  */
 router.get('/test', (req, res) => {
-    res.send('v1 docs success')
+    res.send('v2 docs success')
 })
 
 export default router

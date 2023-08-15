@@ -18,7 +18,7 @@ const CropSchema = mongoose.Schema(
     },
     {
         timestamps: true,
-        collection: 'crops',
+        //collection: 'crops',
     }
 )
 

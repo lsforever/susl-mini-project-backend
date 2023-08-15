@@ -1,12 +1,25 @@
 {
-    "name": "Agro Backend",
+    "name": "agro-backend",
     "version": "1.0.0",
     "description": "Node js Express server with mongodb as database for Agro applications.",
     "main": "index.js",
     "type": "module",
     "scripts": {
         "start": "nodemon --inspect src/index.js",
+        "background": "src/index.js &",
+        "dev": "set NODE_ENV=development && nodemon --inspect src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "@comment scripts": {
+        "@script start": [
+            "This is the start command.",
+            "--inspect switch, listens for a debugging client. By default, it will listen at host and port 127.0.0.1:9229"
+        ],
+        "@script background": [
+            "This will run server as a background process.",
+            "&, will do the trick."
+        ],
+        "@script dev": "This will run server with -development- env."
     },
     "keywords": [],
     "author": "lsforever",
@@ -16,6 +29,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
+        "express-async-errors": "^3.1.1",
         "express-healthcheck": "^0.1.0",
         "express-rate-limit": "^6.9.0",
         "express-validator": "^7.0.1",

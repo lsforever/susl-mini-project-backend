@@ -1,6 +1,6 @@
-import rateLimit from "express-rate-limit";
-import RedisStore from "rate-limit-redis";
-import { createClient } from "redis";
+import rateLimit from 'express-rate-limit'
+import RedisStore from 'rate-limit-redis'
+import { createClient } from 'redis'
 
 // Create a `node-redis` client
 const client = createClient({
@@ -8,20 +8,12 @@ const client = createClient({
 
     socket: {
         port: 6379,
-        host: "client",
+        host: 'client',
     },
-}).on("connect", function () {
-    //TODO remove console log and use logger.. remove on connect function too
-    console.log(
-        "Redis connected --------------= ===================================== " +
-            redis_host +
-            ":" +
-            redis_port
-    );
-});
+})
 
 // Then connect to the Redis server
-await client.connect();
+await client.connect()
 
 // Create and use the rate limiter
 const limiter = rateLimit({
@@ -35,6 +27,6 @@ const limiter = rateLimit({
     store: new RedisStore({
         sendCommand: (...args) => client.sendCommand(args),
     }),
-});
+})
 
-export default limiter;
+export default limiter

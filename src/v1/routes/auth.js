@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 import User from '../../models/User.js'
 
-router.post('/register', async (req, res, next) => {
+router.post('local/register', async (req, res, next) => {
     const { email, password, name } = req.body
     const user = new User({
         email,
@@ -21,7 +21,7 @@ router.post('/register', async (req, res, next) => {
 import passport from 'passport'
 import jwt from 'jsonwebtoken'
 router.post(
-    '/login',
+    'local/login',
     passport.authenticate('local', { session: false }),
     async (req, res) => {
         try {

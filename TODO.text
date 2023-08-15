@@ -77,3 +77,22 @@ Private claims are optional, and are any claims that don't fall under the regist
 "name" is the full name of the user who was issued the JWT, and is a public claim.
 "iat" is the "issued at" date for the token, and is a registered claim.
 ///JWT ///////////////////
+
+
+
+// TODO send 404 for all not found end points
+// TODO add security to endpoints in docs
+
+
+//TODO do the api versioning
+
+
+
+// TODO clear app.js by making a loader for the server .remove unnecsary items to load file.
+
+
+
+// todo add cashing
+
+//pagination sort filter
+https://jeffdevslife.com/p/1-mongodb-query-of-advanced-filtering-sorting-limit-field-and-pagination-with-mongoose/
