@@ -90,16 +90,16 @@ app.use(limiters)
 //app.use(redisLimiters);
 //TODO add to loaders
 
-import Logger from './configs/logger.js'
-app.get('/test', (req, res) => {
-    Logger.error('This is an error log')
-    Logger.warn('This is a warn log')
-    Logger.info('This is a info log')
-    Logger.http('This is a http log')
-    Logger.debug('This is a debug log')
+//import Logger from './configs/logger.js'
+// app.get('/test', (req, res) => {
+//     Logger.error('This is an error log')
+//     Logger.warn('This is a warn log')
+//     Logger.info('This is a info log')
+//     Logger.http('This is a http log')
+//     Logger.debug('This is a debug log')
 
-    res.send('test 1')
-})
+//     res.send('test 1')
+// })
 
 import v1Routes from './v1/routes/index.js'
 app.use('/api/v1/', v1Routes)
