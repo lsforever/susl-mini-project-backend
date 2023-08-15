@@ -17,12 +17,14 @@ router.post('/local/register', async (req, res, next) => {
         password,
         name,
     })
-    var doc = await User.register(user, password, (error) => {
-        if (error) {
-            console.error('Error registering user:', error)
-            return next(error)
-        }
-    })
+    // var doc = await User.register(user, password, (error) => {
+    //     if (error) {
+    //         console.error('Error registering user:', error)
+    //         return next(error)
+    //     }
+    // })
+
+    var doc = await User.register(user, password)
     res.send(doc)
 })
 
