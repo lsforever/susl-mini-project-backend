@@ -5,7 +5,7 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "node --inspect src/index.js",
+        "start": "node src/index.js",
         "background": "src/index.js &",
         "dev": "set NODE_ENV=development && nodemon --inspect src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
