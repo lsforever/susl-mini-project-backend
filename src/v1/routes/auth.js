@@ -6,7 +6,11 @@ router.get('/test', async (req, res) => {
     res.send('auth test success')
 })
 
-router.post('local/register', async (req, res, next) => {
+router.post('/test', async (req, res) => {
+    res.json('Post test success')
+})
+
+router.post('/local/register', async (req, res, next) => {
     const { email, password, name } = req.body
     const user = new User({
         email,
@@ -25,7 +29,7 @@ router.post('local/register', async (req, res, next) => {
 import passport from 'passport'
 import jwt from 'jsonwebtoken'
 router.post(
-    'local/login',
+    '/local/login',
     passport.authenticate('local', { session: false }),
     async (req, res) => {
         try {
