@@ -86,7 +86,7 @@ app.use('/healthcheck', expressHealthcheck())
 // adding rate limiters
 import limiters from './middlewares/rateLimiterExpress.js'
 //import redisLimiters from "./middlewares/rateLimiterWithRedis.js";
-app.use(limiters)
+//app.use(limiters) //TODO uncomment this only
 //app.use(redisLimiters);
 //TODO add to loaders
 
