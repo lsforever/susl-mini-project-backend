@@ -9,7 +9,7 @@ const app = express()
 
 // Connect Databse
 import connect from './configs/db.js'
-connect()
+await connect()
 
 import cors from 'cors'
 app.use(cors())
