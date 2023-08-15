@@ -90,6 +90,7 @@ app.use(limiters)
 //app.use(redisLimiters);
 //TODO add to loaders
 
+///////////////////////////////////////////////////////////////////
 //import Logger from './configs/logger.js'
 // app.get('/test', (req, res) => {
 //     Logger.error('This is an error log')
@@ -100,6 +101,7 @@ app.use(limiters)
 
 //     res.send('test 1')
 // })
+/////////////////////////////////////////////////////////////////////
 
 import v1Routes from './v1/routes/index.js'
 app.use('/api/v1/', v1Routes)
