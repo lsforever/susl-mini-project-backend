@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 import User from '../../models/User.js'
 
-router.get('/test', (req, res) => {
+router.get('/test', async (req, res) => {
     res.send('auth test success')
 })
 

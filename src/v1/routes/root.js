@@ -4,7 +4,7 @@ import CustomError from '../../utils/errors/CustomError.js'
 
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 
-router.get('/test', (req, res) => {
+router.get('/test', async (req, res) => {
     res.send('success')
 })
 
