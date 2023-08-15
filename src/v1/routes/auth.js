@@ -2,6 +2,10 @@ import express from 'express'
 const router = express.Router()
 import User from '../../models/User.js'
 
+router.get('/test', (req, res) => {
+    res.send('auth test success')
+})
+
 router.post('local/register', async (req, res, next) => {
     const { email, password, name } = req.body
     const user = new User({
