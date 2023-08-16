@@ -14,6 +14,10 @@ await connect()
 import cors from 'cors'
 app.use(cors())
 
+if (process.env.NODE_ENV !== 'development') {
+    app.set('trust proxy', 1) // No need for the local env //TODO check in server
+}
+
 //body parser for parsing request body
 app.use(bodyParser.json())
 app.use(
@@ -86,7 +90,7 @@ app.use('/healthcheck', expressHealthcheck())
 // adding rate limiters
 import limiters from './middlewares/rateLimiterExpress.js'
 //import redisLimiters from "./middlewares/rateLimiterWithRedis.js";
-//app.use(limiters) //TODO uncomment this only
+app.use(limiters) //TODO uncomment this only
 //app.use(redisLimiters);
 //TODO add to loaders
 

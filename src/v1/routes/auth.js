@@ -60,4 +60,33 @@ router.get(
     }
 )
 
+router.get(
+    '/google',
+    passport.authenticate('google', {
+        session: false,
+        // ['openid', 'profile', 'email']
+        scope: ['profile', 'email'],
+    })
+)
+
+router.get(
+    '/google/callback',
+    passport.authenticate('google', {
+        session: false,
+        failureRedirect: '/api/v1/auth/google',
+    }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        //res.redirect('/')
+
+        var payload = {
+            profile: req.user,
+            expire: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        }
+        // eslint-disable-next-line no-undef
+        var token = jwt.sign(payload, process.env.JWT_SECRET_KEY)
+        res.json({ profile: req.user, token: token })
+    }
+)
+
 export default router

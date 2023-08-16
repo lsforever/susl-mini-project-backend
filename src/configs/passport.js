@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
 import User from '../models/User.js'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 
 const passportConfig = () => {
     // =======================================
@@ -52,6 +54,29 @@ const passportConfig = () => {
                 return done(error, false)
             }
         })
+    )
+
+    // Google Strategy
+
+    passport.use(
+        new GoogleStrategy(
+            {
+                clientID: process.env.GOOGLE_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                callbackURL:
+                    process.env.BASE_URL + '/api/v1/auth/google/callback',
+            },
+            function (accessToken, refreshToken, profile, cb) {
+                // User.findOrCreate(
+                //     { googleId: profile.id },
+                //     function (err, user) {
+                //         return cb(err, user)
+                //     }
+                // )
+
+                cb(null, profile)
+            }
+        )
     )
 }
 
