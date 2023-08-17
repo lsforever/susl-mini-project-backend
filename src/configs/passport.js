@@ -32,16 +32,16 @@ const passportConfig = () => {
     //opts.issuer = process.env.JWT_AUDIENCE
 
     passport.use(
-        new JwtStrategy(opts, async function (jwt_payload, done) {
+        new JwtStrategy(opts, async (jwt_payload, done) => {
             try {
                 var user = await User.findOne({ email: jwt_payload.email })
 
-                // if (jwt_payload.expire <= Date.now()) {
-                //     return done(new Error('TokenExpired'), null)
-                // }
+                if (jwt_payload.expire <= Date.now()) {
+                    return done(new Error('Token Expired'), null)
+                }
 
-                //user = user.toObject()
-                //user.payload = jwt_payload
+                user = user.toObject()
+                user.payload = jwt_payload
                 //console.log(user)
 
                 if (user) {
@@ -66,18 +66,46 @@ const passportConfig = () => {
                 callbackURL:
                     process.env.BASE_URL + '/api/v1/auth/google/callback',
             },
-            function (accessToken, refreshToken, profile, cb) {
-                // User.findOrCreate(
-                //     { googleId: profile.id },
-                //     function (err, user) {
-                //         return cb(err, user)
-                //     }
-                // )
+            async (accessToken, refreshToken, profile, cb) => {
+                try {
+                    var { sub, name, email, picture } = profile._json
+                    var user = await User.findOne({ email: email })
+                    // User.findOrCreate(
+                    //     { googleId: profile.id },
+                    //     function (err, user) {
+                    //         return cb(err, user)
+                    //     }
+                    // )
 
-                cb(null, profile)
+                    if (!user) {
+                        user = await User.create({
+                            email,
+                            name,
+                            photo: picture,
+                            googleId: sub,
+                        })
+                    }
+                    cb(null, user)
+                } catch (error) {
+                    return cb(error, false)
+                }
             }
         )
     )
+}
+
+var x = {
+    profile: {
+        _id: '64de4c919c2a2d1195d2d8a3',
+        email: 'tankamalin@gmail.com',
+        name: 'tanka malin',
+        photo: 'https://lh3.googleusercontent.com/a/AAcHTtdl0RPfUEAGZeykNX9KjYfzgGysrjusyJk2TZHHIjRn=s96-c',
+        googleId: '102686773898258556215',
+        createdAt: '2023-08-17T16:36:33.500Z',
+        updatedAt: '2023-08-17T16:36:33.500Z',
+        __v: 0,
+    },
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhbmthbWFsaW5AZ21haWwuY29tIiwiZXhwaXJlIjoxNjk0ODgyNDczMzU2LCJpYXQiOjE2OTIyOTA0NzN9.Lzy2b4FfwdaITgneMZ_SdhDnGwGOQRJ8VcKOEig8_UI',
 }
 
 export default passportConfig

@@ -11,11 +11,18 @@ const UserSchema = mongoose.Schema(
         username: {
             type: String,
             required: false,
-            unique: false,
+            unique: true,
         },
         name: {
             type: String,
             required: true,
+            unique: true,
+        },
+        photo: {
+            type: String,
+        },
+        googleId: {
+            type: String,
             unique: true,
         },
     },

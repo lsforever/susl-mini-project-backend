@@ -1,47 +1,28 @@
 import express from 'express'
 const router = express.Router()
 import User from '../../models/User.js'
+import passport from 'passport'
+import jwt from 'jsonwebtoken'
 
-router.get('/test', async (req, res) => {
-    res.send('auth test success')
-})
-
-router.post('/test', async (req, res) => {
-    res.json('Post test success')
-})
-
-router.post('/local/register', async (req, res, next) => {
+router.post('/local/register', async (req, res) => {
     const { email, password, name } = req.body
     const user = new User({
         email,
-        password,
         name,
     })
-    // var doc = await User.register(user, password, (error) => {
-    //     if (error) {
-    //         console.error('Error registering user:', error)
-    //         return next(error)
-    //     }
-    // })
-
     var doc = await User.register(user, password)
-    res.send(doc)
+    res.json(doc)
 })
 
-import passport from 'passport'
-import jwt from 'jsonwebtoken'
 router.post(
     '/local/login',
     passport.authenticate('local', { session: false }),
     async (req, res) => {
         try {
             if (req.isAuthenticated()) {
-                var payload = {
+                var token = generateToken({
                     email: req.user.email,
-                    expire: Date.now() + 1000 * 60 * 60 * 24 * 7,
-                }
-                // eslint-disable-next-line no-undef
-                var token = jwt.sign(payload, process.env.JWT_SECRET_KEY)
+                })
                 res.json({ token: token })
             } else {
                 res.json('Unauthorized')
@@ -56,7 +37,7 @@ router.get(
     '/protected',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        res.send(JSON.stringify(req.user))
+        res.send(JSON.stringify('Access Given'))
     }
 )
 
@@ -75,18 +56,25 @@ router.get(
         session: false,
         failureRedirect: '/api/v1/auth/google',
     }),
-    function (req, res) {
+    async (req, res) => {
         // Successful authentication, redirect home.
         //res.redirect('/')
 
-        var payload = {
-            profile: req.user,
-            expire: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        }
-        // eslint-disable-next-line no-undef
-        var token = jwt.sign(payload, process.env.JWT_SECRET_KEY)
-        res.json({ profile: req.user, token: token })
+        var token = generateToken({
+            email: req.user.email,
+        })
+        res.json({ user: req.user, token: token })
     }
 )
+
+const generateToken = (data) => {
+    var payload = {
+        ...data,
+        // Expire in a month
+        expire: Date.now() + 1000 * 60 * 60 * 24 * 30,
+    }
+    // eslint-disable-next-line no-undef
+    return jwt.sign(payload, process.env.JWT_SECRET_KEY)
+}
 
 export default router
