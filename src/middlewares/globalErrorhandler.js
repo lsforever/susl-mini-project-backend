@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import CustomError from '../utils/errors/CustomError.js'
+import ApiError from '../utils/errors/ApiError.js'
 import {
     ReasonPhrases,
     StatusCodes,
@@ -33,14 +33,14 @@ const devErrors = (res, error) => {
 
 const castErrorHandler = (err) => {
     const msg = `Invalid value for ${err.path}: ${err.value}!`
-    return new CustomError(msg, StatusCodes.BAD_REQUEST)
+    return new ApiError(msg, StatusCodes.BAD_REQUEST)
 }
 
 const duplicateKeyErrorHandler = (err) => {
     const name = err.keyValue.name
     const msg = `There is a duplicate key ${name}. Please use another name!`
 
-    return new CustomError(msg, StatusCodes.BAD_REQUEST)
+    return new ApiError(msg, StatusCodes.BAD_REQUEST)
 }
 
 const validationErrorHandler = (err) => {
@@ -48,7 +48,7 @@ const validationErrorHandler = (err) => {
     const errorMessages = errors.join('. ')
     const msg = `Invalid input data: ${errorMessages}`
 
-    return new CustomError(msg, StatusCodes.BAD_REQUEST)
+    return new ApiError(msg, StatusCodes.BAD_REQUEST)
 }
 
 const prodErrors = (res, error) => {

@@ -24,25 +24,24 @@ const passportConfig = () => {
     // JWT Strategy
     var opts = {}
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
-    // eslint-disable-next-line no-undef
     opts.secretOrKey = process.env.JWT_SECRET_KEY
-    // eslint-disable-next-line no-undef
     //opts.secretOrKey = process.env.JWT_ISSUER
-    // eslint-disable-next-line no-undef
     //opts.issuer = process.env.JWT_AUDIENCE
 
     passport.use(
         new JwtStrategy(opts, async (jwt_payload, done) => {
             try {
-                var user = await User.findOne({ email: jwt_payload.email })
+                // TODO we can cross reference with token stored in user model to invalidate outdated tokens. But this will lead in one more database trip. Also this invvalidates the JWT decentralized principle. It will invalidate the usage that we used JWT in the first place... We can implement it if needed. But then we should save last issued token at the controllers and it should be cross validated in here.
+                //var user = await User.findOne({ _id: jwt_payload._id })
 
                 if (jwt_payload.expire <= Date.now()) {
                     return done(new Error('Token Expired'), null)
                 }
 
-                user = user.toObject()
-                user.payload = jwt_payload
+                //user = user.toObject()
+                //user.payload = jwt_payload
                 //console.log(user)
+                var user = jwt_payload
 
                 if (user) {
                     return done(null, user)
@@ -68,7 +67,8 @@ const passportConfig = () => {
             },
             async (accessToken, refreshToken, profile, cb) => {
                 try {
-                    var { sub, name, email, picture } = profile._json
+                    var { sub, name, email, picture, email_verified } =
+                        profile._json
                     var user = await User.findOne({ email: email })
                     // User.findOrCreate(
                     //     { googleId: profile.id },
@@ -83,6 +83,7 @@ const passportConfig = () => {
                             name,
                             photo: picture,
                             googleId: sub,
+                            emailVerified: email_verified,
                         })
                     }
                     cb(null, user)

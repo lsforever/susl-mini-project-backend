@@ -1,8 +1,8 @@
-import CropRepository from '../repositories/crop.js'
+import cropRepository from '../repositories/crop.js'
 
 const getAllCrops = async () => {
     try {
-        const allCrops = CropRepository.getAllCrops()
+        const allCrops = cropRepository.getAllCrops()
         return allCrops
     } catch (error) {
         throw error
@@ -11,7 +11,7 @@ const getAllCrops = async () => {
 
 const getOneCrop = async (cropId) => {
     try {
-        const crop = CropRepository.getOneCrop(cropId)
+        const crop = cropRepository.getOneCrop(cropId)
         return crop
     } catch (error) {
         throw error
@@ -34,7 +34,7 @@ const createNewCrop = async (newCrop) => {
 
 const updateOneCrop = async (cropId, changes) => {
     try {
-        const updatedCrop = CropRepository.updateOneCrop(cropId, changes)
+        const updatedCrop = cropRepository.updateOneCrop(cropId, changes)
         return updatedCrop
     } catch (error) {
         throw error
@@ -49,4 +49,10 @@ const deleteOneCrop = async (cropId) => {
     }
 }
 
-export { getAllCrops, getOneCrop, createNewCrop, updateOneCrop, deleteOneCrop }
+export default {
+    getAllCrops,
+    getOneCrop,
+    createNewCrop,
+    updateOneCrop,
+    deleteOneCrop,
+}

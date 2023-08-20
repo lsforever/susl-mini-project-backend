@@ -1,4 +1,4 @@
-class CustomError extends Error {
+class ApiError extends Error {
     constructor(statusCode, message, response) {
         super(message || 'Unknown Error')
         this.statusCode = statusCode
@@ -13,4 +13,4 @@ class CustomError extends Error {
     }
 }
 
-export default CustomError
+export default ApiError

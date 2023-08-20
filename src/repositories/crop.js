@@ -85,4 +85,10 @@ const deleteOneCrop = (cropId) => {
     }
 }
 
-export { getAllCrops, createNewCrop, getOneCrop, updateOneCrop, deleteOneCrop }
+export default {
+    getAllCrops,
+    createNewCrop,
+    getOneCrop,
+    updateOneCrop,
+    deleteOneCrop,
+}

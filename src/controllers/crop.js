@@ -1,4 +1,4 @@
-import cropService from '../services/workoutService'
+import cropService from '../services/crop.js'
 
 const getAllCrops = async (req, res) => {
     try {
@@ -114,4 +114,4 @@ const deleteOneCrop = async (req, res) => {
     }
 }
 
-export { getAllCrops, getOneCrop, createNewCrop, updateOneCrop, deleteOneCrop }
+export default { getAllCrops, getOneCrop, createNewCrop, updateOneCrop, deleteOneCrop }

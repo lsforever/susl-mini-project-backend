@@ -1,0 +1,33 @@
+1. Range in crop model
+2. role auth
+3. crop routes implementation
+4. change payload to id and role.
+5. add roles to user
+6. add token to user schema and remove populating token in request
+7. integrate analytics to the server
+8. add caching
+9. add permission filter to data and add other permission in routes too
+10. chnage loading to loaders from app.js
+
+
+
+router.get(
+    '/protected',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        res.send(JSON.stringify('Access Given'))
+    }
+)
+
+
+const permission = ac.can('user').readOwn('account');
+permission.granted;       // true
+permission.attributes;    // ['*', '!record.id']
+permission.filter(data);  // filtered data (without record.id)
+
+
+
+router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser);
+router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers);
+router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser);
+router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser);
