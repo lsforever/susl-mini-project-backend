@@ -1,0 +1,104 @@
+/api/v1/games:
+    get:
+        security:
+            - bearerAuth: []
+        tags:
+            - Games
+        parameters:
+            - in: query
+              name: platform
+              schema:
+                  type: string
+              description: The platform of the game
+        responses:
+            200:
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                status:
+                                    type: string
+                                    example: OK
+                                data:
+                                    type: array
+                                    items:
+            5XX:
+                description: FAILED
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                status:
+                                    type: string
+                                    example: FAILED
+                                data:
+                                    type: object
+                                    properties:
+                                        error:
+                                            type: string
+                                            example: 'Some error message'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# /pets:
+#     get:
+#         security:
+#             - bearerAuth: []
+#         tags:
+#             - Games
+#         parameters:
+#             - in: query
+#               name: platform
+#               schema:
+#                   type: string
+#               description: The platform of the game
+#         responses:
+#             200:
+#                 description: OK
+#                 content:
+#                     application/json:
+#                         schema:
+#                             type: object
+#                             properties:
+#                                 status:
+#                                     type: string
+#                                     example: OK
+#                                 data:
+#                                     type: array
+#                                     items:
+#             5XX:
+#                 description: FAILED
+#                 content:
+#                     application/json:
+#                         schema:
+#                             type: object
+#                             properties:
+#                                 status:
+#                                     type: string
+#                                     example: FAILED
+#                                 data:
+#                                     type: object
+#                                     properties:
+#                                         error:
+#                                             type: string
+#                                             example: 'Some error message'
+

@@ -31,3 +31,64 @@ router.get('/user/:userId', userController.allowIfLoggedin, userController.getUs
 router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers);
 router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser);
 router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser);
+
+
+
+
+
+/////////////////////////////////
+//////////////////////////////////
+///////////////////////////////////
+
+
+// TODO use below code to params and pagination stufff..............
+// TODO use below code to params and pagination stufff..............
+// TODO use below code to params and pagination stufff..............
+// TODO use below code to params and pagination stufff..............
+// TODO use below code to params and pagination stufff..............
+// TODO use below code to params and pagination stufff..............
+
+
+const getAllCrops = async (req, res) => {
+    try {
+        var page = req.params.page ? req.params.page : 1
+        var limit = req.params.limit ? req.params.limit : 10
+
+        const allCrops = cropService.getAllCrops()
+        res.send({ status: 'OK', data: allCrops })
+    } catch (error) {
+        res.status(error?.status || 500).send({
+            status: 'FAILED',
+            data: { error: error?.message || error },
+        })
+    }
+}
+
+
+
+//////////////////////
+//////////////////////
+//////////////////////
+response example
+//////////////////////
+res.staus(StatusCodes.OK).json({
+            status: ReasonPhrases.OK,
+            token: token,
+})
+//////////////////////
+//////////////////////
+//////////////////////
+//////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// 02 getList	                        GET     http://my.api.url/posts?sort=["title","ASC"]&range=[0, 24]&filter={"title":"bar"}
+// 02 getMany	                        GET     http://my.api.url/posts?filter={"_id":[123,456,789]}
+// 02 getManyReference	                GET     http://my.api.url/posts?filter={"author_id":345}
+// 03 getOne	                        GET     http://my.api.url/posts/123
+// 01 // create	                        POST    http://my.api.url/posts
+// 04 update	                        PUT     http://my.api.url/posts/123
+// 04 updateMany(Multiple calls to)     PUT     http://my.api.url/posts/123
+// 05 delete	                        DELETE  http://my.api.url/posts/123
+// 06 deleteMany(Filter calls to)       DELETE  http://my.api.url/posts/123
+////////////////////////////////////////////////////////////////////////////////////////////

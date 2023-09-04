@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 const CropSchema = mongoose.Schema(
     {
@@ -8,7 +9,7 @@ const CropSchema = mongoose.Schema(
         },
         category: {
             type: mongoose.Types.ObjectId,
-            ref: 'CropCategory',
+            ref: 'CropCategory', //TODO remove hardcoded value
             required: true,
         },
         botanical: {
@@ -43,6 +44,8 @@ const CropSchema = mongoose.Schema(
         //collection: 'crops',
     }
 )
+
+CropSchema.plugin(mongoosePaginate)
 
 const CropModel = mongoose.model('Crop', CropSchema)
 export default CropModel

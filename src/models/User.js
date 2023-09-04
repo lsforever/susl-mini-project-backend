@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import passportLocalMongoose from 'passport-local-mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 import { roles } from '../constants/index.js'
+
 const UserSchema = mongoose.Schema(
     {
         email: {
@@ -48,6 +50,8 @@ UserSchema.plugin(passportLocalMongoose, {
     usernameField: 'email',
     hashField: 'password',
 })
+
+UserSchema.plugin(mongoosePaginate)
 
 const UserModel = mongoose.model('User', UserSchema)
 export default UserModel

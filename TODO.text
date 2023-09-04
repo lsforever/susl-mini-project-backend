@@ -120,3 +120,31 @@ https://www.twilio.com/blog/verify-phone-numbers-with-node-js-using-twilio-sms-e
 
 
 // https://tx.shadcn.com/ for a fullstack way
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////
+// 02 getList	                        GET     http://my.api.url/posts?sort=["title","ASC"]&range=[0, 24]&filter={"title":"bar"}
+// 02 getMany	                        GET     http://my.api.url/posts?filter={"_id":[123,456,789]}
+// 02 getManyReference	                GET     http://my.api.url/posts?filter={"author_id":345}
+// 03 getOne	                        GET     http://my.api.url/posts/123
+// 01 // create	                        POST    http://my.api.url/posts
+// 04 update	                        PUT     http://my.api.url/posts/123
+// 04 updateMany(Multiple calls to)     PUT     http://my.api.url/posts/123
+// 05 delete	                        DELETE  http://my.api.url/posts/123
+// 06 deleteMany(Filter calls to)       DELETE  http://my.api.url/posts/123
+//////////////////////////////

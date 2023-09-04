@@ -8,13 +8,64 @@ import CropModel from '../../models/Crop.js'
 router.get(
     '/',
     passport.authenticate('jwt', { session: false }),
-    cropController.getAllCrops
+    cropController.getCrops
 )
 
+/**
+ * @openapi
+ * /crops/{cropId}:
+ *   get:
+ *     summary: Find crop by ID
+ *     description: Returns a single crop
+ *     security:
+ *       - bearerAuth: []
+ *     tags:
+ *       - Crops
+ *     parameters:
+ *       - in: path
+ *         name: cropId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the crop
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: object
+ *       400:
+ *         description: Invalid ID supplied
+ *       404:
+ *         description: Crop not found
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Some error message"
+ */
 router.get(
     '/:cropId',
     passport.authenticate('jwt', { session: false }),
-    cropController.getOneCrop
+    cropController.getCrop
 )
 
 router.post(

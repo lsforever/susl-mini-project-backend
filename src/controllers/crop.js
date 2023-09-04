@@ -1,74 +1,45 @@
 import cropService from '../services/crop.js'
+import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 
-const getAllCrops = async (req, res) => {
-    try {
-        var page = req.params.page ? req.params.page : 1
-        var limit = req.params.limit ? req.params.limit : 10
+const getCrops = async (req, res) => {
+    const filter = req.query.filter || {} // TODO change these to filter
+    const options = req.query.options || {
+        page: 1,
+        limit: 10,
+        collation: {
+            locale: 'en',
+        },
+    } // TODO change these to options
 
-        const allCrops = cropService.getAllCrops()
-        res.send({ status: 'OK', data: allCrops })
-    } catch (error) {
-        res.status(error?.status || 500).send({
-            status: 'FAILED',
-            data: { error: error?.message || error },
-        })
-    }
+    const crops = cropService.getCrops(filter, options)
+    res.staus(StatusCodes.OK).json({
+        status: ReasonPhrases.OK,
+        data: crops,
+    })
 }
 
-const getOneCrop = async (req, res) => {
+const getCrop = async (req, res) => {
     const {
         params: { cropId },
     } = req
-    if (!cropId) {
-        res.status(400).send({
-            status: 'FAILED',
-            data: { error: 'Parameter cropId can not be empty' },
-        })
-    }
-    try {
-        const crop = cropService.getOneCrop(cropId)
-        res.send({ status: 'OK', data: crop })
-    } catch (error) {
-        res.status(error?.status || 500).send({
-            status: 'FAILED',
-            data: { error: error?.message || error },
-        })
-    }
+    const crop = cropService.getCrop(cropId)
+    res.staus(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: crop,
+    })
 }
 
 const createNewCrop = async (req, res) => {
     const { body } = req
-    if (
-        !body.name ||
-        !body.mode ||
-        !body.equipment ||
-        !body.exercises ||
-        !body.trainerTips
-    ) {
-        res.status(400).send({
-            status: 'FAILED',
-            data: {
-                error: 'One of the following keys is missing or is empty in request body: name, mode, equipment, exercises, trainerTips',
-            },
-        })
-        return
-    }
-    const newCrop = {
-        name: body.name,
-        mode: body.mode,
-        equipment: body.equipment,
-        exercises: body.exercises,
-        trainerTips: body.trainerTips,
-    }
-    try {
-        const createdCrop = cropService.createNewWorkout(newCrop)
-        res.status(201).send({ status: 'OK', data: createdCrop })
-    } catch (error) {
-        res.status(error?.status || 500).send({
-            status: 'FAILED',
-            data: { error: error?.message || error },
-        })
-    }
+    // const newCrop = {
+    //     name: body.name, // TODOdo validations
+    // }
+    const newCrop = body
+    const createdCrop = cropService.createNewCrop(newCrop)
+    res.staus(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: createdCrop,
+    })
 }
 
 const updateOneCrop = async (req, res) => {
@@ -76,42 +47,29 @@ const updateOneCrop = async (req, res) => {
         body,
         params: { cropId },
     } = req
-    if (!cropId) {
-        res.status(400).send({
-            status: 'FAILED',
-            data: { error: 'Parameter :cropId can not be empty' },
-        })
-    }
-    try {
-        const updatedCrop = cropService.updateOneCrop(cropId, body)
-        res.send({ status: 'OK', data: updatedCrop })
-    } catch (error) {
-        res.status(error?.status || 500).send({
-            status: 'FAILED',
-            data: { error: error?.message || error },
-        })
-    }
+
+    const updatedCrop = cropService.updateOneCrop(cropId, body)
+    res.staus(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: updatedCrop,
+    })
 }
 
 const deleteOneCrop = async (req, res) => {
     const {
         params: { cropId },
     } = req
-    if (!cropId) {
-        res.status(400).send({
-            status: 'FAILED',
-            data: { error: 'Parameter :cropId can not be empty' },
-        })
-    }
-    try {
-        cropService.deleteOneCrop(cropId)
-        res.status(204).send({ status: 'OK' })
-    } catch (error) {
-        res.status(error?.status || 500).send({
-            status: 'FAILED',
-            data: { error: error?.message || error },
-        })
-    }
+    cropService.deleteOneCrop(cropId)
+    res.staus(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: cropId,
+    })
 }
 
-export default { getAllCrops, getOneCrop, createNewCrop, updateOneCrop, deleteOneCrop }
+export default {
+    getCrops,
+    getCrop,
+    createNewCrop,
+    updateOneCrop,
+    deleteOneCrop,
+}

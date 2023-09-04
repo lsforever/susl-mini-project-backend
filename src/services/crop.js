@@ -1,57 +1,32 @@
 import cropRepository from '../repositories/crop.js'
 
-const getAllCrops = async () => {
-    try {
-        const allCrops = cropRepository.getAllCrops()
-        return allCrops
-    } catch (error) {
-        throw error
-    }
+const getCrops = async (query, options) => {
+    const crops = cropRepository.getCrops(query, options)
+    return crops
 }
 
-const getOneCrop = async (cropId) => {
-    try {
-        const crop = cropRepository.getOneCrop(cropId)
-        return crop
-    } catch (error) {
-        throw error
-    }
+const getCrop = async (cropId) => {
+    const crop = cropRepository.getCrop(cropId)
+    return crop
 }
 
 const createNewCrop = async (newCrop) => {
-    const CropToInsert = {
-        ...newCrop,
-        createdAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
-        updatedAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
-    }
-    try {
-        const createdCrop = Crop.createNewCrop(CropToInsert)
-        return createdCrop
-    } catch (error) {
-        throw error
-    }
+    const createdCrop = cropRepository.createNewCrop(newCrop)
+    return createdCrop
 }
 
 const updateOneCrop = async (cropId, changes) => {
-    try {
-        const updatedCrop = cropRepository.updateOneCrop(cropId, changes)
-        return updatedCrop
-    } catch (error) {
-        throw error
-    }
+    const updatedCrop = cropRepository.updateOneCrop(cropId, changes)
+    return updatedCrop
 }
 
 const deleteOneCrop = async (cropId) => {
-    try {
-        Crop.deleteOneCrop(cropId)
-    } catch (error) {
-        throw error
-    }
+    cropRepository.deleteOneCrop(cropId)
 }
 
 export default {
-    getAllCrops,
-    getOneCrop,
+    getCrops,
+    getCrop,
     createNewCrop,
     updateOneCrop,
     deleteOneCrop,

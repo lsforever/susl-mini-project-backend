@@ -1,49 +1,80 @@
-const workoutService = require('../services/workoutService');
-const { all } = require('../v1/routes');
+import userService from '../services/user.js'
+import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 
-const getAllWorkout = (req, res) => {
-    const allWorkouts = workoutService.getAllWorkout();
-    res.send({ status: 'OK', data: allWorkouts });
+const getUsers = async (req, res) => {
+    const filter = req.query.filter || {} // TODO change these to filter
+    const options = req.query.options || {
+        page: 1,
+        limit: 10,
+        collation: {
+            locale: 'en',
+        },
+    } // TODO change these to options
+
+    const users = userService.getUsers(filter, options)
+    res.status(StatusCodes.OK).json({
+        status: ReasonPhrases.OK,
+        data: users,
+    })
 }
 
-const getOneWorkout = (req, res) => {
-    const getOneWorkout = workoutService.getOneWorkout(req.params.Id);
-    res.send(`Get one wourkout ${req.params.Id}`);
+const getUser = async (req, res) => {
+    const {
+        params: { userId },
+    } = req
+    console.log(userId + ' - xxxxxxxxxxxxxxxxxxxxxxxx')
+    const user = await userService.getUser(userId)
+    res.status(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: user,
+    })
 }
 
-const createNewWorkout = (req, res) => { 
-    const { body } = req;
-    // clausula de cierre
-    if(!body.name || !body.mode || !body.equipment || !body.exercises || !body.trainerTips){
-        return;
+const createNewUser = async (req, res) => {
+    const { body } = req
+    const newUser = {
+        email: body.email,
+        emailVerified: body.email,
+        role: body.email,
+        phone: body.email,
+        name: body.email,
+        photo: body.email,
     }
-
-    const newWorkout = {
-        name: body.name,
-        mode: body.mode,
-        equipment: body.equipment,
-        exercises: body.exercises,
-        trainerTips: body.trainerTips
-    };
-       
-    const createdWorkout = workoutService.createNewWorkout(newWorkout);
-    res.status(201).send({status: 'OK', data: createdWorkout});
+    const createdUser = userService.createNewUser(newUser)
+    res.status(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: createdUser,
+    })
 }
 
-const updateWorkout = (req, res) => {
-    const updated = workoutService.updateWorkout(req.params.Id);
-    res.send(`Update wourkout ${req.params.Id}`);
+const updateOneUser = async (req, res) => {
+    const {
+        body,
+        params: { userId },
+    } = req
+
+    const updatedUser = userService.updateOneUser(userId, body)
+    res.status(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: updatedUser,
+    })
 }
 
-const deleteWorkout = (req, res) => {
-    workoutService.deleteWorkout(req.params.Id);
-    res.send(`Delete wourkout ${req.params.Id}`);
+const deleteOneUser = async (req, res) => {
+    const {
+        params: { userId },
+    } = req
+    userService.deleteOneUser(userId)
+    res.status(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: userId,
+    })
 }
 
-module.exports = {
-    getAllWorkout,
-    getOneWorkout,
-    createNewWorkout,
-    updateWorkout,
-    deleteWorkout
+export default {
+    getUsers,
+    getUser,
+    createNewUser,
+    updateOneUser,
+    deleteOneUser,
 }

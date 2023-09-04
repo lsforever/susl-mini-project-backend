@@ -37,15 +37,18 @@ import morganMiddleware from './middlewares/morganMiddleware.js'
 app.use(morganMiddleware)
 
 app.get('/check', (req, res) => {
-    res.send('Success 1')
+    res.send('check')
 })
 
 // docs
 import swaggerUi from 'swagger-ui-express'
-import swaggerSpec from './configs/swaggerJsdoc.js'
-app.use('/api/doc', swaggerUi.serve)
-app.get('/api/doc', swaggerUi.setup(swaggerSpec))
-app.get('/api/doc/json', (req, res) => {
+//import swaggerSpec, { setupOptions } from './configs/swaggerJsdoc.js'
+import { setupOptions } from './configs/swaggerJsdoc.js'
+app.use('/api/docs', swaggerUi.serve)
+//app.get('/api/docs', swaggerUi.setup(swaggerSpec))
+// app.get('/api/docs', swaggerUi.setup(swaggerSpec, setupOptions))
+app.get('/api/docs', swaggerUi.setup(null, setupOptions))
+app.get('/api/docs/json', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(swaggerSpec)
 })
@@ -112,7 +115,11 @@ app.get('/test', (req, res) => {
 /////////////////////////////////////////////////////////////////////
 
 import v1Routes from './v1/routes/index.js'
+import v2Routes from './v2/routes/index.js'
+
+app.use('/static', express.static('src/assets')) //TODO add rate limits and change static file route too
 app.use('/api/v1/', v1Routes)
+app.use('/api/v2/', v2Routes)
 
 //TODO remove below
 import passport from 'passport'
