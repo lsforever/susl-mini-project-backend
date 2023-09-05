@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import passportLocalMongoose from 'passport-local-mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 import { roles } from '../constants/index.js'
+import m2s from 'mongoose-to-swagger'
 
 const UserSchema = mongoose.Schema(
     {
@@ -9,16 +10,25 @@ const UserSchema = mongoose.Schema(
             type: String,
             required: true,
             unique: true,
+            description: 'Email of the user',
+            example: 'john@xyz.com',
+            format: 'email',
+            //pattern: [x-y]
+            //minimum: 0
         },
         emailVerified: {
             type: Boolean,
             required: true,
             default: false,
+            description: 'If user has verified email or not',
+            example: true,
         },
         role: {
             type: String,
             default: roles.USER,
-            enum: [roles.ADMIN, roles.USER, roles.OWNER],
+            enum: [roles.USER, roles.ADMIN, roles.OWNER],
+            description: 'Role of the user',
+            example: roles.USER,
         },
         token: {
             type: String,
@@ -26,18 +36,27 @@ const UserSchema = mongoose.Schema(
         phone: {
             type: String,
             unique: true,
+            description: 'Phone number of the user',
+            example: '+94776417754',
+            // Add match regex pattern for the phone number
         },
         name: {
             type: String,
             required: true,
             unique: true,
+            description: 'Name of the user',
+            example: 'John',
         },
         photo: {
             type: String,
+            description: 'Link of the photo of user',
+            example: 'https://xyz.com/img/john123',
         },
         googleId: {
             type: String,
             unique: true,
+            description: 'Google ID of the user',
+            example: '103486752882118666135',
         },
     },
     {
@@ -54,6 +73,14 @@ UserSchema.plugin(passportLocalMongoose, {
 UserSchema.plugin(mongoosePaginate)
 
 const UserModel = mongoose.model('User', UserSchema)
+
+const m2sOptions = {
+    props: ['example', 'format', 'min', 'max', 'default'],
+    omitFields: ['token', 'password', 'salt'],
+    omitMongooseInternals: false,
+}
+
+export const userSwaggerSchema = m2s(UserModel, m2sOptions)
 export default UserModel
 
 // TODO in user controller, remove role field or add permission. Also use .select('-token') to stop sending token in the get requests.

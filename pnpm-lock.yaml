@@ -44,6 +44,9 @@ dependencies:
   mongoose-paginate-v2:
     specifier: ^1.7.31
     version: 1.7.31
+  mongoose-to-swagger:
+    specifier: ^1.5.1
+    version: 1.5.1
   morgan:
     specifier: ^1.10.0
     version: 1.10.0
@@ -1881,6 +1884,10 @@ packages:
   /mongoose-paginate-v2@1.7.31:
     resolution: {integrity: sha512-Zz7i/1k7/MJqipzttn9SUenbcW1hC63qBOB7HHBNMfIfg0AOPFT2CdAWpeAJ7BBGEQ4qC1Gu02fIaSeMmXOT0A==}
     engines: {node: '>=4.0.0'}
+    dev: false
+
+  /mongoose-to-swagger@1.5.1:
+    resolution: {integrity: sha512-gwEr0NhA+DyGswtgypIoV/iR0RGX4jY/SE9zmYYk6qpG2C83urcQfYJWzm7PsDPo3snMm8XjBYiAtLyYAqirXA==}
     dev: false
 
   /mongoose@7.4.1:

@@ -10,7 +10,7 @@ const registerUser = async (req, res) => {
         name,
     }
     const doc = await authService.registerUser(user, password)
-    res.staus(StatusCodes.OK).json({ status: ReasonPhrases.OK, data: doc })
+    res.status(StatusCodes.OK).json({ status: ReasonPhrases.OK, data: doc })
 }
 
 const localLogin = async (req, res) => {
@@ -27,7 +27,7 @@ const localLogin = async (req, res) => {
 
         var payload = { _id, role }
         var token = authService.getToken(payload)
-        res.staus(StatusCodes.OK).json({
+        res.status(StatusCodes.OK).json({
             status: ReasonPhrases.OK,
             token: token,
         })
@@ -55,7 +55,7 @@ const googleCallback = async (req, res) => {
     var payload = { _id, role }
     var token = authService.getToken(payload)
 
-    res.staus(StatusCodes.OK).json({
+    res.status(StatusCodes.OK).json({
         status: ReasonPhrases.OK,
         user: req.user,
         token: token,

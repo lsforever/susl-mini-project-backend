@@ -4,6 +4,12 @@ const roles = {
     OWNER: 'owner',
 }
 
+const climateZones = {
+    DRY: 'dry',
+    WET: 'wet',
+    INTERMEDIATE: 'intermediate',
+}
+
 const PRODUCT_STATUS = {
     Rejected: 'Rejected',
     Approved: 'Approved',
@@ -24,4 +30,4 @@ const REVIEW_STATUS = {
     Waiting_Approval: 'Waiting Approval',
 }
 
-export { roles, PRODUCT_STATUS, CART_ITEM_STATUS, REVIEW_STATUS }
+export { roles, climateZones, PRODUCT_STATUS, CART_ITEM_STATUS, REVIEW_STATUS }

@@ -1,42 +1,179 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
+import m2s from 'mongoose-to-swagger'
+import { climateZones } from '../constants/index.js'
 
 const CropSchema = mongoose.Schema(
     {
         name: {
             type: String,
             required: true,
+            unique: true,
+            description: 'Name of the crop',
+            example: 'Paddy',
         },
         category: {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.ObjectId,
             ref: 'CropCategory', //TODO remove hardcoded value
             required: true,
+            description: 'Category of the crop',
+            example: 'Response - Vegetables, Post - 64dbeac4c84d7b5eb71b4cb1',
         },
         botanical: {
             type: String,
             required: true,
+            unique: true,
+            description: 'Botanical name of the crop',
+            example: 'Oryza sativa',
         },
-        varities: [String],
+        //varieties: [String],
+        varieties: {
+            type: [
+                {
+                    type: String,
+                    description: 'One Variety of the crop',
+                    example: 'Bg 750',
+                },
+            ],
+            description: 'Different varieties of the crop',
+            example: ['Bg 300', 'Bg 750'],
+        },
         factors: {
-            rainfall: {
-                min: { type: Number, min: 0 },
-                max: { type: Number, min: 0 },
-            },
-            zones: [{ type: String, enum: ['dry', 'wet', 'intermediate'] }],
-            soil: {
-                min: { type: Number, min: 3.5, max: 10 },
-                max: { type: Number, min: 3.5, max: 10 },
-            },
-            period: {
-                type: String,
-                enum: ['long', 'short'],
-                required: true,
+            description: 'These are the factors realated to the crop',
+            type: {
+                _id: false,
+                rainfall: {
+                    type: {
+                        _id: false,
+                        min: {
+                            type: Number,
+                            min: 0,
+                            description: 'Minimum Rainfall',
+                            example: 20,
+                        },
+                        max: {
+                            type: Number,
+                            min: 0,
+                            description: 'Maximun Rainfall',
+                            example: 100,
+                        },
+                    },
+                    description:
+                        'Min Max Range of rainfall needed for the crop',
+                },
+                zones: {
+                    type: [
+                        {
+                            type: String,
+                            enum: [
+                                climateZones.DRY,
+                                climateZones.WET,
+                                climateZones.INTERMEDIATE,
+                            ],
+                            description: 'Single climate zone',
+                            example: climateZones.WET,
+                        },
+                    ],
+                    description: 'Different timezones where the crop grows',
+                    example: [climateZones.DRY, climateZones.WET],
+                },
+                soil: {
+                    type: {
+                        _id: false,
+                        min: {
+                            type: Number,
+                            min: 3.5,
+                            max: 10,
+                            description: 'Minimum soil PH value',
+                            example: 4,
+                        },
+                        max: {
+                            type: Number,
+                            min: 3.5,
+                            max: 10,
+                            description: 'Maximum soil PH value',
+                            example: 8,
+                        },
+                    },
+                    description: 'Range of soil PH level suitable for the crop',
+                },
+                duration: {
+                    type: {
+                        _id: false,
+                        min: {
+                            type: Number,
+                            min: 0,
+                            description:
+                                'Minimum number of days in crop duration',
+                            example: 90,
+                        },
+                        max: {
+                            type: Number,
+                            min: 0,
+                            description:
+                                'Maximum number of days in crop duration',
+                            example: 100,
+                        },
+                    },
+                    description:
+                        'Duration of the crop in number of days. ex- Carrot has a crop duration of 90-100 days',
+                },
             },
         },
         other: {
-            extra: String,
-            tutorial: [{ name: String, value: String }],
-            videos: [{ name: String, value: String }],
+            description: 'This is more info about crop',
+            type: {
+                _id: false,
+                extra: {
+                    type: String,
+                    description:
+                        'Link of extra details on crop. Markdown file of data on crops',
+                    example: 'https://xyz.com/crops/extra/carrot',
+                },
+                tutorials: {
+                    type: [
+                        {
+                            type: {
+                                name: {
+                                    type: String,
+                                    description: 'Name of the tutorial',
+                                    example: 'Carrot Tutorial 01',
+                                },
+                                value: {
+                                    type: String,
+                                    description:
+                                        'Link of the tutorial. Markdown file of data',
+                                    example:
+                                        'https://xyz.com/crops/extra/tutorials/12345',
+                                },
+                            },
+                            description: 'A single tutorial in crop',
+                        },
+                    ],
+                    description: 'Tutorials list for the crop',
+                },
+                videos: {
+                    type: [
+                        {
+                            type: {
+                                name: {
+                                    type: String,
+                                    description: 'Name of the video',
+                                    example: 'Carrot video 01',
+                                },
+                                value: {
+                                    type: String,
+                                    description: 'Link of the video',
+                                    example:
+                                        'https://xyz.com/crops/extra/videos/12345',
+                                },
+                            },
+                            description: 'A single video in crop',
+                        },
+                    ],
+                    description: 'Videos list for the crop',
+                },
+            },
         },
     },
     {
@@ -48,4 +185,17 @@ const CropSchema = mongoose.Schema(
 CropSchema.plugin(mongoosePaginate)
 
 const CropModel = mongoose.model('Crop', CropSchema)
+
+const m2sOptions = {
+    props: ['example', 'format', 'min', 'max', 'default'],
+    //omitFields: ['_id'],
+    omitMongooseInternals: false,
+}
+
+export const cropSwaggerSchema = m2s(CropModel, m2sOptions)
+// import util from 'util'
+// console.log(
+//     util.inspect(cropSwaggerSchema, false, null, true /* enable colors */)
+// )
+
 export default CropModel

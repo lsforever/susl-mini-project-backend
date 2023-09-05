@@ -7,7 +7,8 @@ const generateToken = (data) => {
         expire: Date.now() + 1000 * 60 * 60 * 24 * 30,
     }
     // eslint-disable-next-line no-undef
-    return jwt.sign(payload, process.env.JWT_SECRET_KEY)
+    var token = jwt.sign(payload, process.env.JWT_SECRET_KEY)
+    return token
 }
 
 export { generateToken }

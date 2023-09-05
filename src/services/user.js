@@ -1,7 +1,7 @@
 import userRepository from '../repositories/user.js'
 
 const getUsers = async (query, options) => {
-    const users = userRepository.getUsers(query, options)
+    const users = await userRepository.getUsers(query, options)
     return users
 }
 
@@ -11,17 +11,17 @@ const getUser = async (userId) => {
 }
 
 const createNewUser = async (newUser) => {
-    const createdUser = userRepository.createNewUser(newUser)
+    const createdUser = await userRepository.createNewUser(newUser)
     return createdUser
 }
 
 const updateOneUser = async (userId, changes) => {
-    const updatedUser = userRepository.updateOneUser(userId, changes)
+    const updatedUser = await userRepository.updateOneUser(userId, changes)
     return updatedUser
 }
 
 const deleteOneUser = async (userId) => {
-    userRepository.deleteOneUser(userId)
+    await userRepository.deleteOneUser(userId)
 }
 
 export default {

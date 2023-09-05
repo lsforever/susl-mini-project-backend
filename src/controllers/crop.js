@@ -11,8 +11,8 @@ const getCrops = async (req, res) => {
         },
     } // TODO change these to options
 
-    const crops = cropService.getCrops(filter, options)
-    res.staus(StatusCodes.OK).json({
+    const crops = await cropService.getCrops(filter, options)
+    res.status(StatusCodes.OK).json({
         status: ReasonPhrases.OK,
         data: crops,
     })
@@ -22,8 +22,8 @@ const getCrop = async (req, res) => {
     const {
         params: { cropId },
     } = req
-    const crop = cropService.getCrop(cropId)
-    res.staus(StatusCodes.OK).send({
+    const crop = await cropService.getCrop(cropId)
+    res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: crop,
     })
@@ -35,8 +35,8 @@ const createNewCrop = async (req, res) => {
     //     name: body.name, // TODOdo validations
     // }
     const newCrop = body
-    const createdCrop = cropService.createNewCrop(newCrop)
-    res.staus(StatusCodes.OK).send({
+    const createdCrop = await cropService.createNewCrop(newCrop)
+    res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: createdCrop,
     })
@@ -48,8 +48,8 @@ const updateOneCrop = async (req, res) => {
         params: { cropId },
     } = req
 
-    const updatedCrop = cropService.updateOneCrop(cropId, body)
-    res.staus(StatusCodes.OK).send({
+    const updatedCrop = await cropService.updateOneCrop(cropId, body)
+    res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: updatedCrop,
     })
@@ -59,8 +59,8 @@ const deleteOneCrop = async (req, res) => {
     const {
         params: { cropId },
     } = req
-    cropService.deleteOneCrop(cropId)
-    res.staus(StatusCodes.OK).send({
+    await cropService.deleteOneCrop(cropId)
+    res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: cropId,
     })

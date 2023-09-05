@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
         },
     } // TODO change these to options
 
-    const users = userService.getUsers(filter, options)
+    const users = await userService.getUsers(filter, options)
     res.status(StatusCodes.OK).json({
         status: ReasonPhrases.OK,
         data: users,
@@ -40,7 +40,7 @@ const createNewUser = async (req, res) => {
         name: body.email,
         photo: body.email,
     }
-    const createdUser = userService.createNewUser(newUser)
+    const createdUser = await userService.createNewUser(newUser)
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: createdUser,
@@ -53,7 +53,7 @@ const updateOneUser = async (req, res) => {
         params: { userId },
     } = req
 
-    const updatedUser = userService.updateOneUser(userId, body)
+    const updatedUser = await userService.updateOneUser(userId, body)
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: updatedUser,
@@ -64,7 +64,7 @@ const deleteOneUser = async (req, res) => {
     const {
         params: { userId },
     } = req
-    userService.deleteOneUser(userId)
+    await userService.deleteOneUser(userId)
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: userId,

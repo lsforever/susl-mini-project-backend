@@ -40,7 +40,7 @@ router.get(
  *                   type: string
  *                   example: OK
  *                 data:
- *                   type: object
+ *                   $ref: '#/components/schemas/Crop'
  *       400:
  *         description: Invalid ID supplied
  *       404:
@@ -70,8 +70,8 @@ router.get(
 
 router.post(
     '/',
-    passport.authenticate('jwt', { session: false }),
-    grantAccess('createAny', CropModel.modelName),
+    //passport.authenticate('jwt', { session: false }),
+    //grantAccess('createAny', CropModel.modelName),
     cropController.createNewCrop
 )
 

@@ -7,7 +7,7 @@ const registerUser = async (user, password) => {
 }
 
 // payload = { _id, role }
-const getToken = async (payload) => {
+const getToken = (payload) => {
     var token = generateToken(payload)
     return token
 }

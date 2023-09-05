@@ -34,7 +34,7 @@ router.get('/', userController.getUsers)
  *                   type: string
  *                   example: OK
  *                 data:
- *                   type: object
+ *                   $ref: '#/components/schemas/User'
  *       400:
  *         description: Invalid ID supplied
  *       404:

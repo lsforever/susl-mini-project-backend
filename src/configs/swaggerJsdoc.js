@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 import swaggerJsdoc from 'swagger-jsdoc'
 
+import { cropSwaggerSchema } from '../models/Crop.js'
+import { userSwaggerSchema } from '../models/User.js'
+
 const optionsV1 = {
     //failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
     definition: {
@@ -26,6 +29,10 @@ const optionsV1 = {
                     scheme: 'bearer',
                     bearerFormat: 'JWT', //TODO change the capital letters to a good design
                 },
+            },
+            schemas: {
+                [userSwaggerSchema.title]: userSwaggerSchema,
+                [cropSwaggerSchema.title]: cropSwaggerSchema,
             },
         },
         // Enable this if auth is needed in every route globaly
