@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 import m2s from 'mongoose-to-swagger'
 import { climateZones } from '../constants/index.js'
+import CategoryModel from './Category.js'
 
 const CropSchema = mongoose.Schema(
     {
@@ -14,7 +15,7 @@ const CropSchema = mongoose.Schema(
         },
         category: {
             type: mongoose.ObjectId,
-            ref: 'CropCategory', //TODO remove hardcoded value
+            ref: CategoryModel.modelName,
             required: true,
             description: 'Category of the crop',
             example: 'Response - Vegetables, Post - 64dbeac4c84d7b5eb71b4cb1',
@@ -26,7 +27,6 @@ const CropSchema = mongoose.Schema(
             description: 'Botanical name of the crop',
             example: 'Oryza sativa',
         },
-        //varieties: [String],
         varieties: {
             type: [
                 {
@@ -187,15 +187,26 @@ CropSchema.plugin(mongoosePaginate)
 const CropModel = mongoose.model('Crop', CropSchema)
 
 const m2sOptions = {
-    props: ['example', 'format', 'min', 'max', 'default'],
+    props: ['example', 'format', 'min', 'max', 'default', 'readOnly'],
     //omitFields: ['_id'],
     omitMongooseInternals: false,
 }
 
-export const cropSwaggerSchema = m2s(CropModel, m2sOptions)
-// import util from 'util'
-// console.log(
-//     util.inspect(cropSwaggerSchema, false, null, true /* enable colors */)
-// )
+const edit = m2s(CropModel, m2sOptions)
+// ------------------------------------------------
+// Adding readonly property to non accessible Mongoose Internals fields (Readonly removes them from swagger post body object)
+edit.properties._id.readOnly = true
+edit.properties.createdAt.readOnly = true
+edit.properties.updatedAt.readOnly = true
+edit.properties.__v.readOnly = true
+// ------------------------------------------------
+
+export const cropSwaggerSchema = edit
+
+//import util from 'util'
+//console.log(util.inspect(cropSwaggerSchema, false, null, true))
+
+// CropModel.schema.tree
+// CropSchema.tree
 
 export default CropModel

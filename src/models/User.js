@@ -75,12 +75,22 @@ UserSchema.plugin(mongoosePaginate)
 const UserModel = mongoose.model('User', UserSchema)
 
 const m2sOptions = {
-    props: ['example', 'format', 'min', 'max', 'default'],
+    props: ['example', 'format', 'min', 'max', 'default', 'readOnly'],
     omitFields: ['token', 'password', 'salt'],
     omitMongooseInternals: false,
 }
 
-export const userSwaggerSchema = m2s(UserModel, m2sOptions)
+const edit = m2s(UserModel, m2sOptions)
+// ------------------------------------------------
+// Adding readonly property to non accessible Mongoose Internals fields (Readonly removes them from swagger post body object)
+edit.properties._id.readOnly = true
+edit.properties.createdAt.readOnly = true
+edit.properties.updatedAt.readOnly = true
+edit.properties.__v.readOnly = true
+// ------------------------------------------------
+
+export const userSwaggerSchema = edit
+
 export default UserModel
 
 // TODO in user controller, remove role field or add permission. Also use .select('-token') to stop sending token in the get requests.

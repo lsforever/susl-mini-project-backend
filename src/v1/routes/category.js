@@ -1,18 +1,20 @@
 import express from 'express'
 const router = express.Router()
-
-import userController from '../../controllers/user.js'
+import passport from 'passport'
+import categoryController from '../../controllers/category.js'
+import grantAccess from '../../middlewares/grantAcccess.js'
+import CategoryModel from '../../models/Category.js'
 
 /**
  * @openapi
- * /users:
+ * /categories:
  *   get:
- *     summary: Get users list
- *     description: Returns a user list based on filters
+ *     summary: Get categories list
+ *     description: Returns a category list based on filters
  *     security:
  *       - bearerAuth: []
  *     tags:
- *       - Users
+ *       - Categories
  *     parameters:
  *       - name: data
  *         in: query
@@ -31,15 +33,7 @@ import userController from '../../controllers/user.js'
  *               example: {}
  *             options:
  *               type: object
- *               properties:
- *                 page:
- *                   type: integer
- *                   example: 1
- *                   description: page number of the result.
- *                 limit:
- *                   type: integer
- *                   example: 10
- *                   description: limit for a one single page.
+ *               example: {}
  *     responses:
  *       200:
  *         description: OK
@@ -52,37 +46,9 @@ import userController from '../../controllers/user.js'
  *                   type: string
  *                   example: OK
  *                 data:
- *                   type: object
- *                   properties:
- *                     docs:
- *                       type: array
- *                       items:
- *                         $ref: '#/components/schemas/User'
- *                     totalDocs:
- *                       type: integer
- *                       example: 1
- *                     limit:
- *                       type: integer
- *                       example: 10
- *                     totalPages:
- *                       type: integer
- *                       example: 1
- *                     page:
- *                       type: integer
- *                       example: 1
- *                     pagingCounter:
- *                       type: integer
- *                       example: 1
- *                     hasPrevPage:
- *                       type: boolean
- *                     hasNextPage:
- *                       type: boolean
- *                     prevPage:
- *                       type: string
- *                       format: nullable
- *                     nextPage:
- *                       type: string
- *                       format: nullable
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Category'
  *       400:
  *         description: Bad request. Invalid filter data supplied
  *       5XX:
@@ -102,25 +68,29 @@ import userController from '../../controllers/user.js'
  *                       type: string
  *                       example: "Some error message"
  */
-router.get('/', userController.getUsers)
+router.get(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    categoryController.getCategories
+)
 
 /**
  * @openapi
- * /users/{userId}:
+ * /categories/{categoryId}:
  *   get:
- *     summary: Find user by ID
- *     description: Returns a single user
+ *     summary: Find category by ID
+ *     description: Returns a single category
  *     security:
  *       - bearerAuth: []
  *     tags:
- *       - Users
+ *       - Categories
  *     parameters:
  *       - in: path
- *         name: userId
+ *         name: categoryId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the user
+ *         description: ID of the category
  *     responses:
  *       200:
  *         description: OK
@@ -133,11 +103,11 @@ router.get('/', userController.getUsers)
  *                   type: string
  *                   example: OK
  *                 data:
- *                   $ref: '#/components/schemas/User'
+ *                   $ref: '#/components/schemas/Category'
  *       400:
  *         description: Invalid ID supplied
  *       404:
- *         description: User not found
+ *         description: Category not found
  *       5XX:
  *         description: FAILED
  *         content:
@@ -155,24 +125,28 @@ router.get('/', userController.getUsers)
  *                       type: string
  *                       example: "Some error message"
  */
-router.get('/:userId', userController.getUser)
+router.get(
+    '/:categoryId',
+    passport.authenticate('jwt', { session: false }),
+    categoryController.getCategory
+)
 
 /**
  * @openapi
- * /users:
+ * /categories:
  *   post:
- *     summary: Add a new user
- *     description: Creates a new user
+ *     summary: Add a new category
+ *     description: Creates a new category
  *     security:
  *       - bearerAuth: []
  *     tags:
- *       - Users
+ *       - Categories
  *     requestBody:
- *       description: The user data to be created
+ *       description: The category data to be created
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Category'
  *     responses:
  *       200:
  *         description: OK
@@ -185,8 +159,8 @@ router.get('/:userId', userController.getUser)
  *                   type: string
  *                   example: OK
  *                 data:
- *                   $ref: '#/components/schemas/User'
- *                   description: Created User
+ *                   $ref: '#/components/schemas/Category'
+ *                   description: Created category
  *       400:
  *         description: Bad Request
  *       5XX:
@@ -206,31 +180,36 @@ router.get('/:userId', userController.getUser)
  *                       type: string
  *                       example: "Some error message"
  */
-router.post('/', userController.createNewUser)
+router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    grantAccess('createAny', CategoryModel.modelName),
+    categoryController.createNewCategory
+)
 
 /**
  * @openapi
- * /user/{userId}:
+ * /categories/{categoryId}:
  *   patch:
- *     summary: Update an existing user
- *     description: Update an existing user by ID
+ *     summary: Update an existing category
+ *     description: Update an existing category by ID
  *     security:
  *       - bearerAuth: []
  *     tags:
- *       - Users
+ *       - Categories
  *     parameters:
  *       - in: path
- *         name: userId
+ *         name: categoryId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the user
+ *         description: ID of the category
  *     requestBody:
- *       description: The user data to be updated
+ *       description: The category data to be updated
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Category'
  *     responses:
  *       200:
  *         description: OK
@@ -243,8 +222,8 @@ router.post('/', userController.createNewUser)
  *                   type: string
  *                   example: OK
  *                 data:
- *                   $ref: '#/components/schemas/User'
- *                   description: The updated User
+ *                   $ref: '#/components/schemas/Category'
+ *                   description: The updated category
  *       400:
  *         description: Bad Request
  *       5XX:
@@ -264,25 +243,30 @@ router.post('/', userController.createNewUser)
  *                       type: string
  *                       example: "Some error message"
  */
-router.patch('/:userId', userController.updateOneUser)
+router.patch(
+    '/:categoryId',
+    passport.authenticate('jwt', { session: false }),
+    grantAccess('updateAny', CategoryModel.modelName),
+    categoryController.updateOneCategory
+)
 
 /**
  * @openapi
- * /users/{userId}:
+ * /categories/{categoryId}:
  *   delete:
- *     summary: Delete a user
- *     description: Delete a single user by ID
+ *     summary: Delete a category
+ *     description: Delete a single category by ID
  *     security:
  *       - bearerAuth: []
  *     tags:
- *       - Users
+ *       - Categories
  *     parameters:
  *       - in: path
- *         name: userId
+ *         name: categoryId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the user
+ *         description: ID of the category
  *     responses:
  *       200:
  *         description: OK
@@ -296,7 +280,7 @@ router.patch('/:userId', userController.updateOneUser)
  *                   example: OK
  *                 data:
  *                   type: string
- *                   description: ID of the deleted user
+ *                   description: ID of the deleted category
  *                   example: 64dbeac4c84d7b5eb71b4cb1
  *       400:
  *         description: Bad Request
@@ -317,6 +301,11 @@ router.patch('/:userId', userController.updateOneUser)
  *                       type: string
  *                       example: "Some error message"
  */
-router.delete('/:userId', userController.deleteOneUser)
+router.delete(
+    '/:categoryId',
+    passport.authenticate('jwt', { session: false }),
+    grantAccess('deleteAny', CategoryModel.modelName),
+    categoryController.deleteOneCategory
+)
 
 export default router

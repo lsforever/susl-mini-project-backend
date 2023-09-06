@@ -10,7 +10,7 @@ const getCrops = async (req, res) => {
             locale: 'en',
         },
     } // TODO change these to options
-
+    options.populate = ['category'] //TODO category populate
     const crops = await cropService.getCrops(filter, options)
     res.status(StatusCodes.OK).json({
         status: ReasonPhrases.OK,

@@ -3,6 +3,7 @@ import swaggerJsdoc from 'swagger-jsdoc'
 
 import { cropSwaggerSchema } from '../models/Crop.js'
 import { userSwaggerSchema } from '../models/User.js'
+import { categorySwaggerSchema } from '../models/Category.js'
 
 const optionsV1 = {
     //failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
@@ -12,7 +13,7 @@ const optionsV1 = {
             title: 'Agro API-V1 Docs',
             version: process.env.npm_package_version, //version: '1.0.0',
             description:
-                'Agro Api application Agro Api application Agro Api application Agro Api applicationAgro Api application Agro Api application Agro Api application Agro Api application Agro Api application Agro Api application Agro Api application Agro Api application Agro Api application <br><br> Agro',
+                'Agro Api Documentation. Check details from the routes. Use Base URL correctly. This is not a public API. Contact us if you want access to data.<br>V1 docs. <br> <br> Agro @2023',
             termsOfService: `${process.env.BASE_URL}/terms/`,
             contact: { email: 'lsforevergamer@gmail.com' },
         },
@@ -28,11 +29,22 @@ const optionsV1 = {
                     type: 'http',
                     scheme: 'bearer',
                     bearerFormat: 'JWT', //TODO change the capital letters to a good design
+                    flows: {
+                        implicit: {
+                            authorizationUrl:
+                                'https://example.com/api/oauth/dialog',
+                            scopes: {
+                                kkkk: 'modify pets in your account',
+                                yyyy: 'read your pets',
+                            },
+                        },
+                    },
                 },
             },
             schemas: {
                 [userSwaggerSchema.title]: userSwaggerSchema,
                 [cropSwaggerSchema.title]: cropSwaggerSchema,
+                [categorySwaggerSchema.title]: categorySwaggerSchema,
             },
         },
         // Enable this if auth is needed in every route globaly
@@ -53,6 +65,10 @@ const optionsV1 = {
             {
                 name: 'Crops',
                 description: 'Everything related to crops',
+            },
+            {
+                name: 'Categories',
+                description: 'Everything related to categories',
             },
         ],
         //TODO  add components (Schemas)

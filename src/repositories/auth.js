@@ -5,4 +5,16 @@ const registerUser = async (user, password) => {
     return doc
 }
 
-export default { registerUser }
+const getUser = async (userId) => {
+    const user = await User.findById(userId)
+    return user
+}
+
+const updateOneUser = async (userId, changes) => {
+    const updatedUser = await User.findByIdAndUpdate(userId, changes, {
+        new: true,
+    })
+    return updatedUser
+}
+
+export default { registerUser, getUser, updateOneUser }

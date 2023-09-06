@@ -71,4 +71,109 @@ router.get(
     authController.googleCallback
 )
 
+/**
+ * @openapi
+ * /auth/me:
+ *   get:
+ *     summary: Get my user profile data
+ *     description: Returns the data of the logged in user
+ *     security:
+ *       - bearerAuth: []
+ *     tags:
+ *       - Auth
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Bad Request
+ *       404:
+ *         description: User not found
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Some error message"
+ */
+router.get(
+    '/me',
+    passport.authenticate('local', { session: false }),
+    authController.getMyProfile
+)
+
+/**
+ * @openapi
+ * /auth/me:
+ *   patch:
+ *     summary: Update my user profile data
+ *     description: Update logged in user's data
+ *     security:
+ *       - bearerAuth: []
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       description: The user data to be updated
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *                   description: The updated User
+ *       400:
+ *         description: Bad Request
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Some error message"
+ */
+router.patch(
+    '/me',
+    passport.authenticate('local', { session: false }),
+    authController.updateMyProfile
+)
+
 export default router

@@ -25,7 +25,9 @@ const createNewUser = async (newUser) => {
 }
 
 const updateOneUser = async (userId, changes) => {
-    const updatedUser = await User.findByIdAndUpdate(userId, changes)
+    const updatedUser = await User.findByIdAndUpdate(userId, changes, {
+        new: true,
+    })
     return updatedUser
 }
 

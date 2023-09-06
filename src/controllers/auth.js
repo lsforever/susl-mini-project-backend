@@ -64,4 +64,30 @@ const googleCallback = async (req, res) => {
 
 // TODO use .select('-token') in above login methods. Do this if needed only to remove token form user object in response...
 
-export default { registerUser, localLogin, googleCallback }
+const getMyProfile = async (req, res) => {
+    const userId = req.user._id
+    const user = await authService.getUser(userId)
+    res.status(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: user,
+    })
+}
+
+const updateMyProfile = async (req, res) => {
+    const userId = req.user._id
+    const body = req.body //TODO add validations
+
+    const updatedUser = await authService.updateOneUser(userId, body)
+    res.status(StatusCodes.OK).send({
+        status: ReasonPhrases.OK,
+        data: updatedUser,
+    })
+}
+
+export default {
+    registerUser,
+    localLogin,
+    googleCallback,
+    getMyProfile,
+    updateMyProfile,
+}

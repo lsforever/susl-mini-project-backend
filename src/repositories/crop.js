@@ -17,7 +17,9 @@ const createNewCrop = async (newCrop) => {
 }
 
 const updateOneCrop = async (cropId, changes) => {
-    const updatedCrop = await Crop.findByIdAndUpdate(cropId, changes)
+    const updatedCrop = await Crop.findByIdAndUpdate(cropId, changes, {
+        new: true,
+    })
     return updatedCrop
 }
 

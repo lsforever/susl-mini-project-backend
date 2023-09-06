@@ -22,7 +22,6 @@ const getUser = async (req, res) => {
     const {
         params: { userId },
     } = req
-    console.log(userId + ' - xxxxxxxxxxxxxxxxxxxxxxxx')
     const user = await userService.getUser(userId)
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,

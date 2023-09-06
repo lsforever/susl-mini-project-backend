@@ -12,4 +12,14 @@ const getToken = (payload) => {
     return token
 }
 
-export default { registerUser, getToken }
+const getUser = async (userId) => {
+    const user = await authRepository.getUser(userId)
+    return user
+}
+
+const updateOneUser = async (userId, changes) => {
+    const updatedUser = await authRepository.updateOneUser(userId, changes)
+    return updatedUser
+}
+
+export default { registerUser, getToken, getUser, updateOneUser }
