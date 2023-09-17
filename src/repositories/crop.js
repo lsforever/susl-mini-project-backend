@@ -6,7 +6,7 @@ const getCrops = async (query, options) => {
 }
 
 const getCrop = async (cropId) => {
-    const crop = await Crop.findById(cropId)
+    const crop = await Crop.findById(cropId, null, { populate: 'category' })
     return crop
 }
 
