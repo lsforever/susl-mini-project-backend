@@ -11,4 +11,28 @@ const generateToken = (data) => {
     return token
 }
 
-export { generateToken }
+import { bucket } from '../configs/storage.js'
+
+const uploadImage = (file, path) =>
+    new Promise((resolve, reject) => {
+        const { buffer } = file
+        //const blob = bucket.file(originalname.replace(/ /g, '_'))
+        //const blob = bucket.file(path)
+        //const blob = bucket.file('test.jpg')
+        const blob = bucket.file(path)
+        const blobStream = blob.createWriteStream({
+            resumable: false,
+        })
+        blobStream
+            .on('finish', () => {
+                const endUrl = blob.name
+                const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+                resolve({ endUrl, publicUrl })
+            })
+            .on('error', () => {
+                reject('Unable to upload image, something went wrong')
+            })
+            .end(buffer)
+    })
+
+export { generateToken, uploadImage }

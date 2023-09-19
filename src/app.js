@@ -11,6 +11,8 @@ import 'express-async-errors'
 
 const app = express()
 
+app.disable('x-powered-by')
+
 // Connect Databse
 import connect from './configs/db.js'
 await connect()
