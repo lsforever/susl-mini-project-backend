@@ -22,7 +22,7 @@ router.use('/crops', cropRoutes)
 // category routes
 router.use('/categories', categoryRoutes)
 
-// category routes
+// image routes
 router.use('/images', imagesRoutes)
 
 export default router

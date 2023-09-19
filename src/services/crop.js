@@ -10,8 +10,8 @@ const getCrop = async (cropId) => {
     return crop
 }
 
-const createNewCrop = async (newCrop) => {
-    const createdCrop = await cropRepository.createNewCrop(newCrop)
+const createNewCrop = async (newCrop, file) => {
+    const createdCrop = await cropRepository.createNewCrop(newCrop, file)
     return createdCrop
 }
 

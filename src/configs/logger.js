@@ -59,6 +59,7 @@ const format = winston.format.combine(
 // In this example, we are using three different transports
 const transports = [
     // Cyclic.sh part /////////////////////////
+    //TODO remove cyclic sh part and add others
     new winston.transports.Console({
         stderrLevels: ['error'],
     }),

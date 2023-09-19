@@ -9,7 +9,6 @@ app.listen(PORT, () => {
     console.log(`Server listening... on port ${PORT}`)
     console.log(
         //`Version 1 Docs are available on http://localhost:${PORT}/api/docs`
-        `Version 1 Docs are available on ${BASE_URL}/api/v1/docs`
+        `Docs are available on ${BASE_URL}/api/docs`
     )
-    console.log(`Version 1 Docs are available on ${BASE_URL}/api/doc`)
 })

@@ -1,4 +1,6 @@
 import Crop from '../models/Crop.js'
+import { uploadImage } from '../utils/extentions.js'
+import mime from 'mime-types'
 
 const getCrops = async (query, options) => {
     const crops = await Crop.paginate(query, options)
@@ -10,9 +12,16 @@ const getCrop = async (cropId) => {
     return crop
 }
 
-const createNewCrop = async (newCrop) => {
+const createNewCrop = async (newCrop, file) => {
     const crop = new Crop(newCrop)
+    const id = String(crop._id)
+    const { endUrl } = await uploadImage(
+        file,
+        'crops/' + `${id}.${mime.extension(file.mimetype)}`
+    )
+    crop.image = endUrl
     await crop.save()
+    // https://storage.googleapis.com/staging.agro-project-396117.appspot.com/crops/650a294b01527757c3ca47c1.png
     return crop
 }
 

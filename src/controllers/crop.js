@@ -35,7 +35,7 @@ const createNewCrop = async (req, res) => {
     //     name: body.name, // TODOdo validations
     // }
     const newCrop = body
-    const createdCrop = await cropService.createNewCrop(newCrop)
+    const createdCrop = await cropService.createNewCrop(newCrop, req.file)
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: createdCrop,

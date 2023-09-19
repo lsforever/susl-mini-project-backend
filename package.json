@@ -38,6 +38,7 @@
         "google-auth-library": "^9.0.0",
         "http-status-codes": "^2.2.0",
         "jsonwebtoken": "^9.0.1",
+        "mime-types": "^2.1.35",
         "mongoose": "^7.4.1",
         "mongoose-paginate-v2": "^1.7.31",
         "mongoose-to-swagger": "^1.5.1",

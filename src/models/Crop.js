@@ -20,6 +20,11 @@ const CropSchema = mongoose.Schema(
             description: 'Category of the crop',
             example: 'Response - Vegetables, Post - 64dbeac4c84d7b5eb71b4cb1',
         },
+        image: {
+            type: String,
+            description: 'Image of the crop',
+            example: 'crops/63dbeac4c84d7b5eb71b4ed1.jpg',
+        },
         botanical: {
             type: String,
             required: true,
