@@ -58,6 +58,12 @@ const format = winston.format.combine(
 // Define which transports the logger must use to print out messages.
 // In this example, we are using three different transports
 const transports = [
+    // Cyclic.sh part /////////////////////////
+    new winston.transports.Console({
+        stderrLevels: ['error'],
+    }),
+    // Cyclic.sh part /////////////////////////
+
     // Allow the use the console to print the messages
     //new winston.transports.Console(),//TODO uncomment them in paid versions
     // Allow to print all the error level messages inside the error.log file
