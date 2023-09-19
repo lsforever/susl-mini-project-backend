@@ -1,5 +1,11 @@
 import winston from 'winston'
 
+const logDir = 'logs'
+import fs from 'fs'
+if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir)
+}
+
 // Define your severity levels.
 // With them, You can create log files,
 // see or hide levels based on the running ENV.
