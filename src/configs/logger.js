@@ -1,10 +1,10 @@
 import winston from 'winston'
 
-const logDir = 'logs'
-import fs from 'fs'
-if (!fs.existsSync(logDir)) {
-    fs.mkdirSync(logDir)
-}
+// const logDir = 'logs'
+// import fs from 'fs'
+// if (!fs.existsSync(logDir)) {
+//     fs.mkdirSync(logDir)
+// }
 
 // Define your severity levels.
 // With them, You can create log files,
@@ -61,13 +61,13 @@ const transports = [
     // Allow the use the console to print the messages
     new winston.transports.Console(),
     // Allow to print all the error level messages inside the error.log file
-    new winston.transports.File({
-        filename: 'logs/error.log',
-        level: 'error',
-    }),
+    // new winston.transports.File({ //TODO uncomment them in paid versions
+    //     filename: 'logs/error.log',
+    //     level: 'error',
+    // }),
     // Allow to print all the error message inside the all.log file
     // (also the error log that are also printed inside the error.log(
-    new winston.transports.File({ filename: 'logs/all.log' }),
+    // new winston.transports.File({ filename: 'logs/all.log' }), //TODO uncomment them in paid versions
 ]
 
 // Create the logger instance that has to be exported
