@@ -59,7 +59,7 @@ const format = winston.format.combine(
 // In this example, we are using three different transports
 const transports = [
     // Allow the use the console to print the messages
-    new winston.transports.Console(),
+    //new winston.transports.Console(),//TODO uncomment them in paid versions
     // Allow to print all the error level messages inside the error.log file
     // new winston.transports.File({ //TODO uncomment them in paid versions
     //     filename: 'logs/error.log',
@@ -68,7 +68,7 @@ const transports = [
     // Allow to print all the error message inside the all.log file
     // (also the error log that are also printed inside the error.log(
     // new winston.transports.File({ filename: 'logs/all.log' }), //TODO uncomment them in paid versions
-]
+] //TODO can silent the logs if needed too.
 
 // Create the logger instance that has to be exported
 // and used to log messages.
