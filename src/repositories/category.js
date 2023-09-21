@@ -1,7 +1,8 @@
 import Category from '../models/Category.js'
 
 const getCategories = async (query, options) => {
-    const categories = await Category.find(query, null, options)
+    //const categories = await Category.find(query, null, options)
+    const categories = await Category.paginate(query, options)
     return categories
 }
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import m2s from 'mongoose-to-swagger'
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 const CategorySchema = mongoose.Schema(
     {
@@ -15,6 +16,7 @@ const CategorySchema = mongoose.Schema(
         timestamps: true,
     }
 )
+CategorySchema.plugin(mongoosePaginate)
 
 const CategoryModel = mongoose.model('Category', CategorySchema)
 
