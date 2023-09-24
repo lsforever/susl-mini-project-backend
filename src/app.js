@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 //body parser for parsing request body
-app.use(bodyParser.json({ limit: '20mb' }))
+app.use(bodyParser.json({ limit: '5mb' }))
 app.use(
     bodyParser.urlencoded({
         extended: true,

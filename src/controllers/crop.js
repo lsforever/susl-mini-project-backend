@@ -30,12 +30,12 @@ const getCrop = async (req, res) => {
 }
 
 const createNewCrop = async (req, res) => {
-    const { body } = req
+    const { body, file } = req
     // const newCrop = {
     //     name: body.name, // TODOdo validations
     // }
-    const newCrop = body
-    const createdCrop = await cropService.createNewCrop(newCrop, req.file)
+    const newCrop = JSON.parse(body.data)
+    const createdCrop = await cropService.createNewCrop(newCrop, file)
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: createdCrop,
