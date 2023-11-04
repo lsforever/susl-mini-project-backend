@@ -4,7 +4,7 @@ import passport from 'passport'
 import cropController from '../../controllers/crop.js'
 import grantAccess from '../../middlewares/grantAcccess.js'
 import CropModel from '../../models/Crop.js'
-import { Image, CropUpload } from '../../middlewares/multer.js'
+import { CropUpload } from '../../middlewares/multer.js'
 
 /**
  * @openapi
@@ -225,6 +225,14 @@ router.post(
     CropUpload,
     cropController.createNewCrop
 )
+// import Crop from '../../models/Crop.js'
+// import util from 'util'
+// router.post('/kkk', async (req, res) => {
+//     const crop = new Crop(req.body)
+//     console.log(util.inspect(crop, false, null, true))
+//     await crop.save()
+//     res.status(200).send('kkk')
+// })
 
 /**
  * @openapi

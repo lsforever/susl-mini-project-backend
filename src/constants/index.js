@@ -10,6 +10,20 @@ const climateZones = {
     INTERMEDIATE: 'intermediate',
 }
 
+const shortMonths = {
+    JANUARY: 'jan',
+    // February: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+    // JANUARY: 'jan',
+}
+
 const PRODUCT_STATUS = {
     Rejected: 'Rejected',
     Approved: 'Approved',
@@ -30,4 +44,11 @@ const REVIEW_STATUS = {
     Waiting_Approval: 'Waiting Approval',
 }
 
-export { roles, climateZones, PRODUCT_STATUS, CART_ITEM_STATUS, REVIEW_STATUS }
+export {
+    roles,
+    climateZones,
+    shortMonths,
+    PRODUCT_STATUS,
+    CART_ITEM_STATUS,
+    REVIEW_STATUS,
+}

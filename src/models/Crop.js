@@ -67,14 +67,37 @@ const CropSchema = mongoose.Schema(
                         'Min Max Range of rainfall needed for the crop',
                 },
                 zones: {
+                    // type: [
+                    //     {
+                    //         type: String,
+                    //         enum: [
+                    //             climateZones.DRY,
+                    //             climateZones.WET,
+                    //             climateZones.INTERMEDIATE,
+                    //         ],
+                    //         description: 'Single climate zone',
+                    //         example: climateZones.WET,
+                    //     },
+                    // ],
                     type: [
                         {
-                            type: String,
-                            enum: [
-                                climateZones.DRY,
-                                climateZones.WET,
-                                climateZones.INTERMEDIATE,
-                            ],
+                            type: {
+                                _id: false,
+                                zone: {
+                                    type: String,
+                                    enum: [
+                                        climateZones.DRY,
+                                        climateZones.WET,
+                                        climateZones.INTERMEDIATE,
+                                    ],
+                                },
+                                months: {
+                                    type: [Number],
+                                    enum: [
+                                        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                                    ],
+                                },
+                            },
                             description: 'Single climate zone',
                             example: climateZones.WET,
                         },
