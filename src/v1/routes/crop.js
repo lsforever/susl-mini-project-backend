@@ -4,7 +4,7 @@ import passport from 'passport'
 import cropController from '../../controllers/crop.js'
 import grantAccess from '../../middlewares/grantAcccess.js'
 import CropModel from '../../models/Crop.js'
-import { Image } from '../../middlewares/multer.js'
+import { Image, CropUpload } from '../../middlewares/multer.js'
 
 /**
  * @openapi
@@ -221,7 +221,8 @@ router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
     grantAccess('createAny', CropModel.modelName),
-    Image.single('image'),
+    //Image.single('image'),
+    CropUpload,
     cropController.createNewCrop
 )
 
