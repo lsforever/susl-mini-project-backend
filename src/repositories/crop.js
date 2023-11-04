@@ -17,20 +17,19 @@ const createNewCrop = async (newCrop, files) => {
     const id = String(crop._id)
 
     if (files.image[0]) {
-        const { endUrl } = await uploadImage(
+        const { endUrl1 } = await uploadImage(
             files.image[0],
-            'crops/images' + `${id}.${mime.extension(files.image[0].mimetype)}`
+            'crops/images/' + `${id}.${mime.extension(files.image[0].mimetype)}`
         )
-        crop.image = endUrl
+        crop.image = endUrl1
     }
 
     if (files.markdown[0]) {
-        const { endUrl } = await uploadImage(
+        const { endUrl2 } = await uploadImage(
             files.markdown[0],
-            'crops/markdowns/' +
-                `${id}.${mime.extension(files.markdown[0].mimetype)}`
+            'crops/markdowns/' + `${id}.md`
         )
-        crop.other.extra = endUrl
+        crop.other.extra = endUrl2
     }
 
     await crop.save()
