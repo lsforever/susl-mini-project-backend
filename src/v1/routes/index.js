@@ -7,7 +7,7 @@ import authRoutes from './auth.js'
 import userRoutes from './user.js'
 import cropRoutes from './crop.js'
 import categoryRoutes from './category.js'
-import imagesRoutes from './image.js'
+import selectRoutes from './select.js'
 
 // root routes
 //router.use('/', rootRoutes)
@@ -21,8 +21,7 @@ router.use('/users', userRoutes)
 router.use('/crops', cropRoutes)
 // category routes
 router.use('/categories', categoryRoutes)
-
-// image routes
-router.use('/images', imagesRoutes)
+// select routes
+router.use('/select', selectRoutes)
 
 export default router
