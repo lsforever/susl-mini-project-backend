@@ -179,7 +179,7 @@ router.patch(
 /**
  * @openapi
  * /auth/google/token:
- *   get:
+ *   post:
  *     summary: Google Login
  *     description: Returns a JWT token for login with google
  *     tags:
@@ -239,8 +239,10 @@ router.post('/google/token', async (req, res) => {
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience:
-                '148267645714-5iq43m9ekje8vh7u80jf545448d4gko8.apps.googleusercontent.com', //TODO add to env // Specify the CLIENT_ID of the app that accesses the backend
+            audience: [
+                '148267645714-5iq43m9ekje8vh7u80jf545448d4gko8.apps.googleusercontent.com',
+                '148267645714-cl3uelsc67tk5pni5bkbic3d63hhe52q.apps.googleusercontent.com',
+            ], //TODO add to env // Specify the CLIENT_ID of the app that accesses the backend
             // Or, if multiple clients access the backend:
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         })

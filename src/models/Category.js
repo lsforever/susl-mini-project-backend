@@ -11,6 +11,13 @@ const CategorySchema = mongoose.Schema(
             description: 'Category name',
             example: 'Vegetables',
         },
+        image: {
+            type: String,
+            unique: true,
+            description: 'Category Image Link',
+            example:
+                'https://storage.googleapis.com/sggs.kkk-hshhs-562436.appspot.com/category/images/veg.jpeg',
+        },
     },
     {
         timestamps: true,

@@ -4,6 +4,7 @@ import passport from 'passport'
 import categoryController from '../../controllers/category.js'
 import grantAccess from '../../middlewares/grantAcccess.js'
 import CategoryModel from '../../models/Category.js'
+import { Image } from '../../middlewares/multer.js'
 
 /**
  * @openapi
@@ -184,6 +185,7 @@ router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
     grantAccess('createAny', CategoryModel.modelName),
+    Image.single('image'),
     categoryController.createNewCategory
 )
 

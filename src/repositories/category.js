@@ -1,4 +1,6 @@
 import Category from '../models/Category.js'
+import { uploadImage } from '../utils/extentions.js'
+import mime from 'mime-types'
 
 const getCategories = async (query, options) => {
     //const categories = await Category.find(query, null, options)
@@ -11,7 +13,13 @@ const getCategory = async (categoryId) => {
     return category
 }
 
-const createNewCategory = async (newCategory) => {
+const createNewCategory = async (newCategory, file) => {
+    const { endUrl } = await uploadImage(
+        file,
+        'categories/images/' +
+            `${newCategory.name}.${mime.extension(file.mimetype)}`
+    )
+    newCategory.image = endUrl
     const category = new Category(newCategory)
     await category.save()
     return category

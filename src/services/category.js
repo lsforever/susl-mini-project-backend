@@ -10,9 +10,10 @@ const getCategory = async (categoryId) => {
     return category
 }
 
-const createNewCategory = async (newCategory) => {
+const createNewCategory = async (newCategory, file) => {
     const createdCategory = await categoryRepository.createNewCategory(
-        newCategory
+        newCategory,
+        file
     )
     return createdCategory
 }

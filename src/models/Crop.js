@@ -229,6 +229,7 @@ edit.properties.updatedAt.readOnly = true
 edit.properties.__v.readOnly = true
 // ------------------------------------------------
 
+// TODO export multiple schemas for different response types to use in swagger
 export const cropSwaggerSchema = edit
 
 //import util from 'util'

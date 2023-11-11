@@ -31,12 +31,25 @@ const getCategory = async (req, res) => {
 }
 
 const createNewCategory = async (req, res) => {
-    const { body } = req
+    // const { body } = req
+    // // const newCategory = {
+    // //     name: body.name, // TODOdo validations
+    // // }
+    // const newCategory = body
+    // const createdCategory = await categoryService.createNewCategory(newCategory)
+    // res.status(StatusCodes.OK).send({
+    //     status: ReasonPhrases.OK,
+    //     data: createdCategory,
+    // })
+    const { body, file } = req
     // const newCategory = {
     //     name: body.name, // TODOdo validations
     // }
-    const newCategory = body
-    const createdCategory = await categoryService.createNewCategory(newCategory)
+    const newCategory = { name: body.name }
+    const createdCategory = await categoryService.createNewCategory(
+        newCategory,
+        file
+    )
     res.status(StatusCodes.OK).send({
         status: ReasonPhrases.OK,
         data: createdCategory,
