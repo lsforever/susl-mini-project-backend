@@ -40,8 +40,9 @@ import { bucket } from '../configs/storage.js'
 const deleteOneCategory = async (categoryId) => {
     const category = await Category.findById(categoryId)
     await Category.findByIdAndDelete(categoryId)
+    const name = category ? category.name : ''
     try {
-        await bucket.file(`categories/images/${category.name}.jpeg`).delete()
+        await bucket.file(`categories/images/${name}.jpeg`).delete()
     } catch (error) {
         if (error.response.statusCode !== 404) {
             throw error
