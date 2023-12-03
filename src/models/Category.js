@@ -31,9 +31,27 @@ CategorySchema.plugin(mongoosePaginate)
 //     next()
 // })
 
+import { bucket } from '../configs/storage.js'
 CategorySchema.pre('findOneAndDelete', async function (next) {
     var category_id = this._conditions._id
+    var crops = await CropModel.find({ category: category_id })
     await CropModel.deleteMany({ category: category_id })
+    crops.foreach(async (crop) => {
+        try {
+            await bucket.file(`crops/images/${crop.cropId}.jpeg`).delete()
+        } catch (error) {
+            if (error.response.statusCode !== 404) {
+                throw error
+            }
+        }
+        try {
+            await bucket.file(`crops/markdowns/${crop.cropId}.md`).delete()
+        } catch (error) {
+            if (error.response.statusCode !== 404) {
+                throw error
+            }
+        }
+    })
     next()
 })
 
