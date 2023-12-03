@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import m2s from 'mongoose-to-swagger'
 import mongoosePaginate from 'mongoose-paginate-v2'
-
+import CropModel from './Crop.js'
 const CategorySchema = mongoose.Schema(
     {
         name: {
@@ -24,6 +24,18 @@ const CategorySchema = mongoose.Schema(
     }
 )
 CategorySchema.plugin(mongoosePaginate)
+
+CategorySchema.pre('deleteMany', { document: true }, async function (next) {
+    var category = this
+    await CropModel.deleteMany({ category: category._id })
+    next()
+})
+
+CategorySchema.pre('deleteOne', { document: true }, async function (next) {
+    var category = this
+    await CropModel.deleteMany({ category: category._id })
+    next()
+})
 
 const CategoryModel = mongoose.model('Category', CategorySchema)
 
