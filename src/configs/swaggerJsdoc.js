@@ -11,7 +11,7 @@ const optionsV1 = {
         openapi: '3.1.0',
         info: {
             title: 'Agro API-V1 Docs',
-            version: process.env.npm_package_version, //version: '1.0.0',
+            version: process.env.npm_package_version || '1.0.0', //version: '1.0.0',
             description:
                 'Agro Api Documentation. Check details from the routes. Use Base URL correctly. This is not a public API. Contact us if you want access to data.<br>V1 docs. <br> <br> Agro @2023',
             termsOfService: `${process.env.BASE_URL}/terms/`,
