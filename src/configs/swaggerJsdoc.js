@@ -45,6 +45,287 @@ const optionsV1 = {
                 [userSwaggerSchema.title]: userSwaggerSchema,
                 [cropSwaggerSchema.title]: cropSwaggerSchema,
                 [categorySwaggerSchema.title]: categorySwaggerSchema,
+                Analytics: {
+                    properties: {
+                        db: {
+                            type: 'object',
+                            properties: {
+                                collections: {
+                                    type: 'number',
+                                    example: '3',
+                                },
+                                views: {
+                                    type: 'number',
+                                    example: '0',
+                                },
+                                objects: {
+                                    type: 'number',
+                                    example: '11',
+                                },
+                                avgObjSize: {
+                                    type: 'number',
+                                    example: '297.54545454545456',
+                                },
+                                dataSize: {
+                                    type: 'number',
+                                    example: '3273',
+                                },
+                                storageSize: {
+                                    type: 'number',
+                                    example: '118784',
+                                },
+                                totalFreeStorageSize: {
+                                    type: 'number',
+                                    example: '0',
+                                },
+                                numExtents: {
+                                    type: 'number',
+                                    example: '0',
+                                },
+                                indexes: {
+                                    type: 'number',
+                                    example: '10',
+                                },
+                                indexSize: {
+                                    type: 'number',
+                                    example: '352256',
+                                },
+                                indexFreeStorageSize: {
+                                    type: 'number',
+                                    example: '0',
+                                },
+                                fileSize: {
+                                    type: 'number',
+                                    example: '0',
+                                },
+                                nsSizeMB: {
+                                    type: 'number',
+                                    example: '0',
+                                },
+                                ok: {
+                                    type: 'number',
+                                    example: '1',
+                                },
+                            },
+                        },
+                        collections: {
+                            type: 'object',
+                            properties: {
+                                crop: {
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            type: 'string',
+                                            example: 'crops',
+                                        },
+                                        size: {
+                                            type: 'number',
+                                            example: '1273',
+                                        },
+                                        count: {
+                                            type: 'number',
+                                            example: '2',
+                                        },
+                                        avgObjSize: {
+                                            type: 'number',
+                                            example: '636',
+                                        },
+                                        numOrphanDocs: {
+                                            type: 'number',
+                                            example: '0',
+                                        },
+                                        storageSize: {
+                                            type: 'number',
+                                            example: '36864',
+                                        },
+                                        freeStorageSize: {
+                                            type: 'number',
+                                            example: '16384',
+                                        },
+                                        capped: {
+                                            type: 'boolean',
+                                        },
+                                        nindexes: {
+                                            type: 'number',
+                                            example: '3',
+                                        },
+                                        totalIndexSize: {
+                                            type: 'number',
+                                            example: '110592',
+                                        },
+                                        totalSize: {
+                                            type: 'number',
+                                            example: '147456',
+                                        },
+                                        indexSizes: {
+                                            type: 'object',
+                                            properties: {
+                                                _id_: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                name_1: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                botanical_1: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                            },
+                                        },
+                                        scaleFactor: {
+                                            type: 'number',
+                                            example: '1',
+                                        },
+                                    },
+                                },
+                                category: {
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            type: 'string',
+                                            example: 'categories',
+                                        },
+                                        size: {
+                                            type: 'number',
+                                            example: '526',
+                                        },
+                                        count: {
+                                            type: 'number',
+                                            example: '4',
+                                        },
+                                        avgObjSize: {
+                                            type: 'number',
+                                            example: '131',
+                                        },
+                                        numOrphanDocs: {
+                                            type: 'number',
+                                            example: '0',
+                                        },
+                                        storageSize: {
+                                            type: 'number',
+                                            example: '36864',
+                                        },
+                                        freeStorageSize: {
+                                            type: 'number',
+                                            example: '16384',
+                                        },
+                                        capped: {
+                                            type: 'boolean',
+                                        },
+                                        nindexes: {
+                                            type: 'number',
+                                            example: '3',
+                                        },
+                                        totalIndexSize: {
+                                            type: 'number',
+                                            example: '110592',
+                                        },
+                                        totalSize: {
+                                            type: 'number',
+                                            example: '147456',
+                                        },
+                                        indexSizes: {
+                                            type: 'object',
+                                            properties: {
+                                                _id_: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                name_1: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                image_1: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                            },
+                                        },
+                                        scaleFactor: {
+                                            type: 'number',
+                                            example: '1',
+                                        },
+                                    },
+                                },
+                                user: {
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            type: 'string',
+                                            example: 'users',
+                                        },
+                                        size: {
+                                            type: 'number',
+                                            example: '1474',
+                                        },
+                                        count: {
+                                            type: 'number',
+                                            example: '5',
+                                        },
+                                        avgObjSize: {
+                                            type: 'number',
+                                            example: '294',
+                                        },
+                                        numOrphanDocs: {
+                                            type: 'number',
+                                            example: '0',
+                                        },
+                                        storageSize: {
+                                            type: 'number',
+                                            example: '45056',
+                                        },
+                                        freeStorageSize: {
+                                            type: 'number',
+                                            example: '20480',
+                                        },
+                                        capped: {
+                                            type: 'boolean',
+                                        },
+                                        nindexes: {
+                                            type: 'number',
+                                            example: '4',
+                                        },
+                                        totalIndexSize: {
+                                            type: 'number',
+                                            example: '131072',
+                                        },
+                                        totalSize: {
+                                            type: 'number',
+                                            example: '176128',
+                                        },
+                                        indexSizes: {
+                                            type: 'object',
+                                            properties: {
+                                                _id_: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                email_1: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                name_1: {
+                                                    type: 'number',
+                                                    example: '36864',
+                                                },
+                                                googleId_1: {
+                                                    type: 'number',
+                                                    example: '20480',
+                                                },
+                                            },
+                                        },
+                                        scaleFactor: {
+                                            type: 'number',
+                                            example: '1',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             },
         },
         // Enable this if auth is needed in every route globaly

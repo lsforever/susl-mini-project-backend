@@ -36,6 +36,9 @@ let grantsObject = {
             'update:any': ['*'],
             'delete:any': ['*'],
         },
+        ['analytics']: {
+            'read:any': ['*'],
+        },
     },
     [roles.USER]: {
         [UserModel.modelName]: {

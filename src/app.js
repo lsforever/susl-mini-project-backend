@@ -92,9 +92,9 @@ app.get('/api/docs/json', (req, res) => {
 //     res.send(openapiSpecificationV2)
 // })
 
-// HEalth check route //TODO change it
-import expressHealthcheck from 'express-healthcheck'
-app.use('/healthcheck', expressHealthcheck())
+// // HEalth check route //TODO change it
+// import expressHealthcheck from 'express-healthcheck'
+// app.use('/healthcheck', expressHealthcheck())
 
 // adding rate limiters
 import limiters from './middlewares/rateLimiterExpress.js'
@@ -112,7 +112,7 @@ app.get('/test', (req, res) => {
     Logger.http('This is a http log')
     Logger.debug('This is a debug log')
 
-    res.send('test 1')
+    res.send('Logger test 1')
 })
 /////////////////////////////////////////////////////////////////////
 
