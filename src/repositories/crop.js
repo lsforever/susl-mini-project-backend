@@ -45,8 +45,23 @@ const updateOneCrop = async (cropId, changes) => {
     return updatedCrop
 }
 
+import { bucket } from '../configs/storage.js'
 const deleteOneCrop = async (cropId) => {
     await Crop.findByIdAndDelete(cropId)
+    try {
+        await bucket.file(`crops/images/${cropId}.jpeg`).delete()
+    } catch (error) {
+        if (error.response.statusCode !== 404) {
+            throw error
+        }
+    }
+    try {
+        await bucket.file(`crops/markdowns/${cropId}.md`).delete()
+    } catch (error) {
+        if (error.response.statusCode !== 404) {
+            throw error
+        }
+    }
 }
 
 export default {

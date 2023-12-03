@@ -36,8 +36,17 @@ const updateOneCategory = async (categoryId, changes) => {
     return updatedCategory
 }
 
+import { bucket } from '../configs/storage.js'
 const deleteOneCategory = async (categoryId) => {
+    const category = await Category.findById(categoryId)
     await Category.findByIdAndDelete(categoryId)
+    try {
+        await bucket.file(`categories/images/${category.name}.jpeg`).delete()
+    } catch (error) {
+        if (error.response.statusCode !== 404) {
+            throw error
+        }
+    }
 }
 
 export default {

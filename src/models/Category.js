@@ -25,15 +25,15 @@ const CategorySchema = mongoose.Schema(
 )
 CategorySchema.plugin(mongoosePaginate)
 
-CategorySchema.pre('deleteMany', { document: true }, async function (next) {
-    var category = this
-    await CropModel.deleteMany({ category: category._id })
-    next()
-})
+// CategorySchema.pre('deleteOne', { document: true }, async function (next) {
+//     var category = this
+//     await CropModel.deleteMany({ category: category._id })
+//     next()
+// })
 
-CategorySchema.pre('deleteOne', { document: true }, async function (next) {
-    var category = this
-    await CropModel.deleteMany({ category: category._id })
+CategorySchema.pre('findOneAndDelete', async function (next) {
+    var category_id = this._conditions._id
+    await CropModel.deleteMany({ category: category_id })
     next()
 })
 
