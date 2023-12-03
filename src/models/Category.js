@@ -38,14 +38,14 @@ CategorySchema.pre('findOneAndDelete', async function (next) {
     await CropModel.deleteMany({ category: category_id })
     crops.forEach(async (crop) => {
         try {
-            await bucket.file(`crops/images/${crop.cropId}.jpeg`).delete()
+            await bucket.file(`crops/images/${crop._id}.jpeg`).delete()
         } catch (error) {
             if (error.response.statusCode !== 404) {
                 throw error
             }
         }
         try {
-            await bucket.file(`crops/markdowns/${crop.cropId}.md`).delete()
+            await bucket.file(`crops/markdowns/${crop._id}.md`).delete()
         } catch (error) {
             if (error.response.statusCode !== 404) {
                 throw error
