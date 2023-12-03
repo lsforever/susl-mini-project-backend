@@ -34,13 +34,7 @@ CategorySchema.plugin(mongoosePaginate)
 import { bucket } from '../configs/storage.js'
 CategorySchema.pre('findOneAndDelete', async function (next) {
     var category_id = this._conditions._id
-    // var crops = await CropModel.find({ category: category_id })
-    var crops = [
-        { cropId: '11' },
-        { cropId: '121' },
-        { cropId: '141' },
-        { cropId: '151' },
-    ]
+    var crops = await CropModel.find({ category: category_id })
     await CropModel.deleteMany({ category: category_id })
     crops.forEach(async (crop) => {
         try {
