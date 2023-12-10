@@ -57,5 +57,4 @@ export {
     PRODUCT_STATUS,
     CART_ITEM_STATUS,
     REVIEW_STATUS,
-    plantingTimeRangeTerms,
 }
