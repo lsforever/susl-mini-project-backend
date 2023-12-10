@@ -10,6 +10,12 @@ const climateZones = {
     INTERMEDIATE: 'intermediate',
 }
 
+// const plantingTimeRangeTerms = {
+//     SHORT: 'short',
+//     LONG: 'long',
+//     INTERMEDIATE: 'intermediate',
+// }
+
 const shortMonths = {
     JANUARY: 'jan',
     // February: 'jan',
@@ -51,4 +57,5 @@ export {
     PRODUCT_STATUS,
     CART_ITEM_STATUS,
     REVIEW_STATUS,
+    plantingTimeRangeTerms,
 }

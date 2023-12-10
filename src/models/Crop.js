@@ -146,6 +146,14 @@ const CropSchema = mongoose.Schema(
                     description:
                         'Duration of the crop in number of days. ex- Carrot has a crop duration of 90-100 days',
                 },
+                long_term: {
+                    // long term, short term
+                    type: Boolean,
+                    default: false,
+                    description:
+                        'Long term or short term... if long term - true, if short term - false',
+                    example: true,
+                },
             },
         },
         other: {
