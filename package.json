@@ -26,6 +26,8 @@
     "license": "ISC",
     "dependencies": {
         "@google-cloud/storage": "^7.1.0",
+        "@turf/boolean-point-in-polygon": "^6.5.0",
+        "@turf/helpers": "^6.5.0",
         "accesscontrol": "^2.2.1",
         "body-parser": "^1.20.2",
         "cors": "^2.8.5",

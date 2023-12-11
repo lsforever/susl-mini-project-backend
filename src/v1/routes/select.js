@@ -101,4 +101,18 @@ router.post('/', async (req, res) => {
     })
 })
 
+import sss from '../../services/select.js'
+router.get('/test', async (req, res) => {
+    // const { body } = req
+    // console.log(body)
+
+    //var loc = point([80.96673, 6.73812])
+    var data = await sss.getFilteredCropListAndData(80.96673, 6.73812) //122
+
+    res.status(200).send({
+        status: 'OK',
+        data: data,
+    })
+})
+
 export default router

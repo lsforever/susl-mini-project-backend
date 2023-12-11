@@ -7,6 +7,11 @@ const getCrops = async (query, options) => {
     return crops
 }
 
+const getCropsWithoutPagination = async (query) => {
+    const crops = await Crop.find(query, null, { populate: 'category' })
+    return crops
+}
+
 const getCrop = async (cropId) => {
     const crop = await Crop.findById(cropId, null, { populate: 'category' })
     return crop
@@ -70,4 +75,5 @@ export default {
     createNewCrop,
     updateOneCrop,
     deleteOneCrop,
+    getCropsWithoutPagination,
 }
