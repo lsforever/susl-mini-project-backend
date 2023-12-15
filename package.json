@@ -61,7 +61,7 @@
     "devDependencies": {
         "@appnest/readme": "^1.2.7",
         "eslint": "^8.46.0",
-        "nodemon": "^3.0.1",
+        "nodemon": "^3.0.2",
         "readme-project-generator": "^1.0.0"
     }
 }

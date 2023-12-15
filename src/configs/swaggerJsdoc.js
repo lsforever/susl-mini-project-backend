@@ -326,6 +326,409 @@ const optionsV1 = {
                         },
                     },
                 },
+                Selects: {
+                    properties: {
+                        status: {
+                            type: 'string',
+                            example: 'OK',
+                        },
+                        data: {
+                            type: 'object',
+                            properties: {
+                                input: {
+                                    type: 'object',
+                                    properties: {
+                                        location: {
+                                            type: 'object',
+                                            properties: {
+                                                longitude: {
+                                                    type: 'number',
+                                                    example: '80.96673',
+                                                },
+                                                latitude: {
+                                                    type: 'number',
+                                                    example: '6.73812',
+                                                },
+                                            },
+                                        },
+                                        is_long_term: {
+                                            type: 'boolean',
+                                        },
+                                        starting_month: {
+                                            type: 'number',
+                                            example: '2',
+                                        },
+                                    },
+                                },
+                                properties: {
+                                    type: 'object',
+                                    properties: {
+                                        objectid: {
+                                            type: 'number',
+                                            example: '122',
+                                        },
+                                        zone: {
+                                            type: 'string',
+                                            example: 'IM2a',
+                                        },
+                                        climatic_zone: {
+                                            type: 'string',
+                                            example: 'INTERMEDIATE ZONE',
+                                        },
+                                        agro_eco_zone: {
+                                            type: 'string',
+                                            example: 'IM2a',
+                                        },
+                                        agro_eco_r: {
+                                            type: 'string',
+                                            example: 'IM2a',
+                                        },
+                                        final_id: {
+                                            type: 'string',
+                                            format: 'nullable',
+                                        },
+                                        terrain: {
+                                            type: 'string',
+                                            example: 'steep, Hilly & rolling',
+                                        },
+                                        major_soil: {
+                                            type: 'string',
+                                            example: 'RBL & RYP soils',
+                                        },
+                                        land_use: {
+                                            type: 'string',
+                                            example:
+                                                'Export agriculture Crops, Mixed Home Gardens, Tea, Vegetables',
+                                        },
+                                        anualrfmm: {
+                                            type: 'string',
+                                            example: '>1800',
+                                        },
+                                        'st_area(shape)': {
+                                            type: 'number',
+                                            example: '0.033790508929347395',
+                                        },
+                                        'st_length(shape)': {
+                                            type: 'number',
+                                            example: '1.854290795579208',
+                                        },
+                                    },
+                                },
+                                zone: {
+                                    type: 'string',
+                                    example: 'intermediate',
+                                },
+                                count: {
+                                    type: 'number',
+                                    example: '1',
+                                },
+                                crops: {
+                                    type: 'array',
+                                    items: {
+                                        type: 'object',
+                                        properties: {
+                                            _id: {
+                                                type: 'string',
+                                                example:
+                                                    '656c302884d21eb3f59a1048',
+                                            },
+                                            name: {
+                                                type: 'string',
+                                                example: 'Carrot',
+                                            },
+                                            category: {
+                                                type: 'object',
+                                                properties: {
+                                                    _id: {
+                                                        type: 'string',
+                                                        example:
+                                                            '656c00f56071657ba779a096',
+                                                    },
+                                                    name: {
+                                                        type: 'string',
+                                                        example: 'Vegetables',
+                                                    },
+                                                    image: {
+                                                        type: 'string',
+                                                        example:
+                                                            'categories/images/Vegetables.jpeg',
+                                                    },
+                                                    createdAt: {
+                                                        type: 'string',
+                                                        format: 'date-time',
+                                                        example:
+                                                            '2023-12-03T04:15:49.878Z',
+                                                    },
+                                                    updatedAt: {
+                                                        type: 'string',
+                                                        format: 'date-time',
+                                                        example:
+                                                            '2023-12-03T04:15:49.878Z',
+                                                    },
+                                                    __v: {
+                                                        type: 'number',
+                                                        example: '0',
+                                                    },
+                                                },
+                                            },
+                                            image: {
+                                                type: 'string',
+                                                example:
+                                                    'crops/images/656c302884d21eb3f59a1048.jpeg',
+                                            },
+                                            botanical: {
+                                                type: 'string',
+                                                example: 'Daucus carota',
+                                            },
+                                            varieties: {
+                                                type: 'array',
+                                                items: {
+                                                    type: 'object',
+                                                    properties: {
+                                                        0: {
+                                                            type: 'string',
+                                                            example: 'N',
+                                                        },
+                                                        1: {
+                                                            type: 'string',
+                                                            example: 'e',
+                                                        },
+                                                        2: {
+                                                            type: 'string',
+                                                            example: 'w',
+                                                        },
+                                                        3: {
+                                                            type: 'string',
+                                                            example: ' ',
+                                                        },
+                                                        4: {
+                                                            type: 'string',
+                                                            example: 'K',
+                                                        },
+                                                        5: {
+                                                            type: 'string',
+                                                            example: 'u',
+                                                        },
+                                                        6: {
+                                                            type: 'string',
+                                                            example: 'r',
+                                                        },
+                                                        7: {
+                                                            type: 'string',
+                                                            example: 'o',
+                                                        },
+                                                        8: {
+                                                            type: 'string',
+                                                            example: 'd',
+                                                        },
+                                                        9: {
+                                                            type: 'string',
+                                                            example: 'a',
+                                                        },
+                                                        10: {
+                                                            type: 'string',
+                                                            example: 'o',
+                                                        },
+                                                        11: {
+                                                            type: 'string',
+                                                            example: 't',
+                                                        },
+                                                    },
+                                                },
+                                                example: [
+                                                    'New Kuroda',
+                                                    'Lanka Carrot',
+                                                ],
+                                            },
+                                            factors: {
+                                                type: 'object',
+                                                properties: {
+                                                    rainfall: {
+                                                        type: 'object',
+                                                        properties: {
+                                                            min: {
+                                                                type: 'number',
+                                                                example: '1500',
+                                                            },
+                                                            max: {
+                                                                type: 'number',
+                                                                example: '3000',
+                                                            },
+                                                        },
+                                                    },
+                                                    zones: {
+                                                        type: 'array',
+                                                        items: {
+                                                            type: 'object',
+                                                            properties: {
+                                                                zone: {
+                                                                    type: 'string',
+                                                                    example:
+                                                                        'intermediate',
+                                                                },
+                                                                months: {
+                                                                    type: 'array',
+                                                                    items: {
+                                                                        type: 'object',
+                                                                        properties:
+                                                                            {},
+                                                                    },
+                                                                    example: [],
+                                                                },
+                                                            },
+                                                        },
+                                                        example: [
+                                                            {
+                                                                zone: 'intermediate',
+                                                                months: [
+                                                                    1, 10, 11,
+                                                                    12, 2, 3, 4,
+                                                                    5, 6, 7, 8,
+                                                                    9,
+                                                                ],
+                                                            },
+                                                        ],
+                                                    },
+                                                    soil: {
+                                                        type: 'object',
+                                                        properties: {
+                                                            min: {
+                                                                type: 'number',
+                                                                example: '6',
+                                                            },
+                                                            max: {
+                                                                type: 'number',
+                                                                example: '6.8',
+                                                            },
+                                                        },
+                                                    },
+                                                    duration: {
+                                                        type: 'object',
+                                                        properties: {
+                                                            min: {
+                                                                type: 'number',
+                                                                example: '85',
+                                                            },
+                                                            max: {
+                                                                type: 'number',
+                                                                example: '100',
+                                                            },
+                                                        },
+                                                    },
+                                                    long_term: {
+                                                        type: 'boolean',
+                                                    },
+                                                },
+                                            },
+                                            other: {
+                                                type: 'object',
+                                                properties: {
+                                                    tutorials: {
+                                                        type: 'array',
+                                                        items: {
+                                                            type: 'object',
+                                                            properties: {},
+                                                        },
+                                                        example: [],
+                                                    },
+                                                    videos: {
+                                                        type: 'array',
+                                                        items: {
+                                                            type: 'object',
+                                                            properties: {},
+                                                        },
+                                                        example: [],
+                                                    },
+                                                    extra: {
+                                                        type: 'string',
+                                                        example:
+                                                            'crops/markdowns/656c302884d21eb3f59a1048.md',
+                                                    },
+                                                },
+                                            },
+                                            createdAt: {
+                                                type: 'string',
+                                                format: 'date-time',
+                                                example:
+                                                    '2023-12-03T07:37:13.363Z',
+                                            },
+                                            updatedAt: {
+                                                type: 'string',
+                                                format: 'date-time',
+                                                example:
+                                                    '2023-12-03T07:37:13.363Z',
+                                            },
+                                            __v: {
+                                                type: 'number',
+                                                example: '0',
+                                            },
+                                        },
+                                    },
+                                    example: [
+                                        {
+                                            _id: '656c302884d21eb3f59a1048',
+                                            name: 'Carrot',
+                                            category: {
+                                                _id: '656c00f56071657ba779a096',
+                                                name: 'Vegetables',
+                                                image: 'categories/images/Vegetables.jpeg',
+                                                createdAt:
+                                                    '2023-12-03T04:15:49.878Z',
+                                                updatedAt:
+                                                    '2023-12-03T04:15:49.878Z',
+                                                __v: 0,
+                                            },
+                                            image: 'crops/images/656c302884d21eb3f59a1048.jpeg',
+                                            botanical: 'Daucus carota',
+                                            varieties: [
+                                                'New Kuroda',
+                                                'Lanka Carrot',
+                                            ],
+                                            factors: {
+                                                rainfall: {
+                                                    min: 1500,
+                                                    max: 3000,
+                                                },
+                                                zones: [
+                                                    {
+                                                        zone: 'intermediate',
+                                                        months: [
+                                                            1, 10, 11, 12, 2, 3,
+                                                            4, 5, 6, 7, 8, 9,
+                                                        ],
+                                                    },
+                                                    {
+                                                        zone: 'dry',
+                                                        months: [10],
+                                                    },
+                                                ],
+                                                soil: {
+                                                    min: 6,
+                                                    max: 6.8,
+                                                },
+                                                duration: {
+                                                    min: 85,
+                                                    max: 100,
+                                                },
+                                                long_term: false,
+                                            },
+                                            other: {
+                                                tutorials: [],
+                                                videos: [],
+                                                extra: 'crops/markdowns/656c302884d21eb3f59a1048.md',
+                                            },
+                                            createdAt:
+                                                '2023-12-03T07:37:13.363Z',
+                                            updatedAt:
+                                                '2023-12-03T07:37:13.363Z',
+                                            __v: 0,
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                    },
+                },
             },
         },
         // Enable this if auth is needed in every route globaly

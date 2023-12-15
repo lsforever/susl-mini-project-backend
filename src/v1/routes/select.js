@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router()
-import cropService from '../../services/crop.js'
+import passport from 'passport'
+import selectController from '../../controllers/select.js'
 
 /**
  * @openapi
@@ -13,7 +14,7 @@ import cropService from '../../services/crop.js'
  *     tags:
  *       - Selects
  *     requestBody:
- *       description: The data to be used for cro selection
+ *       description: The data to be used for crop selection
  *       content:
  *         application/json:
  *           schema:
@@ -22,12 +23,18 @@ import cropService from '../../services/crop.js'
  *               location:
  *                 type: object
  *                 properties:
- *                   x:
+ *                   longitude:
  *                     type: number
- *                     example: 41.40338
- *                   y:
+ *                     example: 80.96673
+ *                   latitude:
  *                     type: number
- *                     example: 2.17403
+ *                     example: 6.73812
+ *               is_long_term:
+ *                 type: boolean
+ *                 example: false
+ *               starting_month:
+ *                 type: number
+ *                 example: 2
  *     responses:
  *       200:
  *         description: OK
@@ -40,37 +47,7 @@ import cropService from '../../services/crop.js'
  *                   type: string
  *                   example: OK
  *                 data:
- *                   type: object
- *                   properties:
- *                     docs:
- *                       type: array
- *                       items:
- *                         $ref: '#/components/schemas/Crop'
- *                     totalDocs:
- *                       type: integer
- *                       example: 1
- *                     limit:
- *                       type: integer
- *                       example: 10
- *                     totalPages:
- *                       type: integer
- *                       example: 1
- *                     page:
- *                       type: integer
- *                       example: 1
- *                     pagingCounter:
- *                       type: integer
- *                       example: 1
- *                     hasPrevPage:
- *                       type: boolean
- *                     hasNextPage:
- *                       type: boolean
- *                     prevPage:
- *                       type: string
- *                       format: nullable
- *                     nextPage:
- *                       type: string
- *                       format: nullable
+ *                   $ref: '#/components/schemas/Selects'
  *       400:
  *         description: Bad request. Invalid filter data supplied
  *       5XX:
@@ -90,29 +67,24 @@ import cropService from '../../services/crop.js'
  *                       type: string
  *                       example: "Some error message"
  */
-router.post('/', async (req, res) => {
-    const { body } = req
-    console.log(body)
-    const crops = await cropService.getCrops({}, {})
+router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    selectController.selectCrops
+)
 
-    res.status(200).send({
-        status: 'OK',
-        data: crops,
-    })
-})
+// import sss from '../../services/select.js'
+// router.get('/test', async (req, res) => {
+//     // const { body } = req
+//     // console.log(body)
 
-import sss from '../../services/select.js'
-router.get('/test', async (req, res) => {
-    // const { body } = req
-    // console.log(body)
+//     //var loc = point([80.96673, 6.73812])
+//     var data = await sss.getFilteredCropListAndData(80.96673, 6.73812) //122
 
-    //var loc = point([80.96673, 6.73812])
-    var data = await sss.getFilteredCropListAndData(80.96673, 6.73812) //122
-
-    res.status(200).send({
-        status: 'OK',
-        data: data,
-    })
-})
+//     res.status(200).send({
+//         status: 'OK',
+//         data: data,
+//     })
+// })
 
 export default router
