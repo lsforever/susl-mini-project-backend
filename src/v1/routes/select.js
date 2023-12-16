@@ -73,16 +73,6 @@ router.get(
     selectController.selectCrops
 )
 
-// router.get('/test', async (req, res) => {
-//     const { body } = req
-//     console.log(req.params.sss)
-
-//     res.status(200).send({
-//         status: 'OK',
-//         data: body,
-//     })
-// })
-
 // import sss from '../../services/select.js'
 // router.get('/test', async (req, res) => {
 //     // const { body } = req
