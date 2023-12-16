@@ -49,10 +49,17 @@ const getFilteredCropListAndData = async (
 
     const crops = await cropRepository.getCropsWithoutPagination({
         'factors.long_term': is_long_term,
-        'factors.zones': {
-            $elemMatch: { zone: climateZone, months: starting_month },
-        },
+        'factors.zones.zone': climateZone,
+        'factors.zones.months': starting_month,
     })
+
+    // const crops = await cropRepository.getCropsWithoutPagination({
+    //     'factors.long_term': is_long_term,
+    //     'factors.zones': {
+    //         $elemMatch: { zone: climateZone, months: starting_month },
+    //     },
+    // })
+
     const data = {
         input: {
             location: { longitude, latitude },
