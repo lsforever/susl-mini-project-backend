@@ -6,7 +6,7 @@ import selectController from '../../controllers/select.js'
 /**
  * @openapi
  * /select:
- *   post:
+ *   get:
  *     summary: Select a best suitable crop list
  *     description: Select a best suitable crop list by giving location etc
  *     security:
@@ -67,11 +67,21 @@ import selectController from '../../controllers/select.js'
  *                       type: string
  *                       example: "Some error message"
  */
-router.post(
+router.get(
     '/',
     passport.authenticate('jwt', { session: false }),
     selectController.selectCrops
 )
+
+// router.get('/test', async (req, res) => {
+//     const { body } = req
+//     console.log(req.params.sss)
+
+//     res.status(200).send({
+//         status: 'OK',
+//         data: body,
+//     })
+// })
 
 // import sss from '../../services/select.js'
 // router.get('/test', async (req, res) => {
