@@ -13,6 +13,12 @@ import selectController from '../../controllers/select.js'
  *       - bearerAuth: []
  *     tags:
  *       - Selects
+ *     parameters:
+ *       - in: path
+ *         name: selections
+ *         type: object
+ *         required: true
+ *         description: Send the object like the body.
  *     requestBody:
  *       description: The data to be used for crop selection
  *       content:
