@@ -2,14 +2,24 @@ import cropService from '../services/crop.js'
 import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 
 const getCrops = async (req, res) => {
-    const filter = req.query.filter || {} // TODO change these to filter
-    const options = req.query.options || {
+    const data = JSON.parse(req.query.data)
+    const filter = data.filter || {} // TODO change these to filter
+    const options = data.options || {
         page: 1,
         limit: 10,
         collation: {
             locale: 'en',
         },
     } // TODO change these to options
+
+    // const filter = req.query.filter || {} // TODO change these to filter
+    // const options = req.query.options || {
+    //     page: 1,
+    //     limit: 10,
+    //     collation: {
+    //         locale: 'en',
+    //     },
+    // } // TODO change these to options
     options.populate = ['category'] //TODO category populate
     const crops = await cropService.getCrops(filter, options)
     res.status(StatusCodes.OK).json({
